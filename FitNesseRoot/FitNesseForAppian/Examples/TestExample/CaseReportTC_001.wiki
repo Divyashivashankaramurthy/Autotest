@@ -1,0 +1,76 @@
+---
+Help: Validation of Pie Chart
+Test
+---
+\!***> FitNesse Configurations
+
+!define TEST_SYSTEM {slim}
+!define COMMAND_PATTERN {java -Dlog4j.configuration=file:///${automated.testing.home}/log4j.properties -cp %p %m}
+!path ${automated.testing.home}/**.jar
+----
+!*** Initialization and Login to Tempo
+
+!| script                     |com.appiancorp.ps.automatedtest.fixture.TempoFixture              |
+|setup with                   |CHROME                          |browser                          |
+|set appian url to            |https://appiancoe.vuram.com/suite/sites/case-management-site      |
+|set appian version to        |22.4                                                              |
+|set appian locale to         |en_US                                                             |
+|set screenshot path to       |C:\Users\u429130\Desktop\Error Screenshots_Case-Management\TC_003\|
+|set take error screenshots to|false                                                             |
+|login with username          |Akash@123                                                         |
+
+*!
+-----
+
+!*** Navigate to records tab
+
+!| script                 |
+|click on menu|Case Report|
+
+!*** Validation of pie chart
+
+!|script                                                                                     |
+|populate field                |Pie chart     |with     |Priority                            |
+|wait for                      |5             |seconds                                       |
+|verify chart                  |Priority Chart|is present                                    |
+|click on pie chart            |Priority Chart|pie slice|[1]                                 |
+|wait for                      |5             |seconds                                       |
+|verify grid                   |High          |column   |Priority|row|*|contains value|High  |
+|verify link                   |close         |is present                                    |
+|click on record related action|High                                                         |
+|Verify text                   |Summary Page  |is present                                    |
+|wait for                      |5             |seconds                                       |
+|verify grid                   |High          |column   |Priority|row|*|contains value|High  |
+|verify link                   |close         |is present                                    |
+|click on link                 |close                                                        |
+|wait for                      |5             |seconds                                       |
+|click on pie chart            |Priority Chart|pie slice|[2]                                 |
+|wait for                      |5             |seconds                                       |
+|verify grid                   |Low           |column   |Priority|row|*|contains value|Low   |
+|verify link                   |close         |is present                                    |
+|click on record related action|Low                                                          |
+|Verify text                   |Summary Page  |is present                                    |
+|wait for                      |5             |seconds                                       |
+|verify grid                   |Low           |column   |Priority|row|*|contains value|Low   |
+|verify link                   |close         |is present                                    |
+|click on link                 |close                                                        |
+|wait for                      |5             |seconds                                       |
+|click on pie chart            |Priority Chart|pie slice|[3]                                 |
+|wait for                      |5             |seconds                                       |
+|verify grid                   |Medium        |column   |Priority|row|*|contains value|Medium|
+|verify link                   |close         |is present                                    |
+|click on record related action|Medium                                                       |
+|Verify text                   |Summary Page  |is present                                    |
+|wait for                      |5             |seconds                                       |
+|verify grid                   |Medium        |column   |Priority|row|*|contains value|Medium|
+|verify link                   |close         |is present                                    |
+|click on link                 |close                                                        |
+
+!*** logout and tear down
+
+!|script  |
+|logout   |
+|tear down|
+
+
+*!

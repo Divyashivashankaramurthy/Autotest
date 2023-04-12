@@ -1,0 +1,91 @@
+---
+Help: To cancel a Partially and completely filled requests
+Test
+---
+!***> FitNesse Configurations
+
+!define TEST_SYSTEM {slim}
+!define COMMAND_PATTERN {java -Dlog4j.configuration=file:///${automated.testing.home}/log4j.properties -cp %p %m}
+!path ${automated.testing.home}/**.jar
+*!
+----
+!3 '''Please follow the directions below to execute the test'''
+
+
+----
+!*** Initialization and Login to Tempo
+
+!| script                     |com.appiancorp.ps.automatedtest.fixture.TempoFixture        |
+|setup with                   |CHROME                       |browser                       |
+|set appian url to            |https://appiancoe.vuram.com/suite/sites/case-management-site|
+|set appian version to        |22.4                                                        |
+|set screenshot path to       |C:\Users\u429130\Desktop\Error Screenshots_Case-Management  |
+|set take error screenshots to|true                                                        |
+|set appian locale to         |en_US                                                       |
+|login with username          |Akash@123                                                   |
+
+*!
+!*** Click on request tab
+
+!|script               |
+|click on menu|Requests|
+
+!*** Click on create New Case 
+
+!| script                                                       |
+|verify record related action  |CREATE A NEW CASE|is not present|
+|click on record related action|CREATE A NEW CASE               |
+
+
+!*** Cancel a completely filled request 
+
+!| script                                                                                                           |
+|wait for                          |5                   |seconds                                                    |
+|populate field                    |Client Number       |with  |100|partially matching picker field suggestion      |
+|click on button                   |Add                                                                             |
+|click on radio option             |Verification                                                                    |
+|populate field                    |Subject             |with  |Testing                                             |
+|populate field                    |Description         |with  |Testing                                             |
+|click on radio option             |High                                                                            |
+|populate field                    |SLA                 |with  |04/5/2023                                           |
+|wait for                          |5                   |seconds                                                    |
+|populate field                    |Reference Case/ Task|with  |c  |partially matching picker field suggestion      |
+|populate field                    |Assigned To         |with  |CM |partially matching picker field suggestion      |
+|populate grid                     |Attach Documents    |column|[1]|row|[1]|with|C:\Users\u429130\Downloads\JPEG.pdf|
+|click on button                   |Cancel                                                                          |
+|click on button                   |yes                                                                             |
+|wait for                          |2                   |seconds                                                    |
+|verify confirmation dialog message|Action completed    |is present                                                 |
+***!
+!*** Cancel a partially filled request
+
+!| script                                                                                                           |
+|verify record related action      |CREATE A NEW CASE   |is not present                                             |
+|click on record related action    |CREATE A NEW CASE                                                               |
+|wait for                          |5                   |seconds                                                    |
+|populate field                    |Client Number       |with  |100|partially matching picker field suggestion      |
+|click on button                   |Add                                                                             |
+|click on radio option             |Verification                                                                    |
+|populate field                    |Subject             |with  |Testing                                             |
+|populate field                    |Description         |with  |Testing                                             |
+|click on radio option             |High                                                                            |
+|populate field                    |Reference Case/ Task|with  |c  |partially matching picker field suggestion      |
+|populate field                    |Assigned To         |with  |CM |partially matching picker field suggestion      |
+|populate grid                     |Attach Documents    |column|[1]|row|[1]|with|C:\Users\u429130\Downloads\JPEG.pdf|
+|verify button                     |cancel              |is present                                                 |
+|click on button                   |Cancel                                                                          |
+|wait for                          |3                   |seconds                                                    |
+|verify button                     |yes                 |is present                                                 |
+|click on button                   |yes                                                                             |
+|wait for                          |4                   |seconds                                                    |
+|verify confirmation dialog message|Action completed    |is present                                                 |
+
+
+*!
+!*** Log out and tear down
+
+!| script |
+|logout   |
+|tear down|
+
+*!

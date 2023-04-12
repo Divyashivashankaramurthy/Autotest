@@ -1,0 +1,132 @@
+---
+Help: Fields validation
+Test
+---
+!***> FitNesse Configurations
+
+!define TEST_SYSTEM {slim}
+!define COMMAND_PATTERN {java -Dlog4j.configuration=file:///${automated.testing.home}/log4j.properties -cp %p %m}
+!path ${automated.testing.home}/**.jar
+!define $a {null}, $b {null},  $c{null}
+*!
+----
+!3 '''Please follow the directions below to execute the test'''
+
+
+----
+!*** Initialization and Login to Tempo
+
+!| script                     |com.appiancorp.ps.automatedtest.fixture.TempoFixture              |
+|setup with                   |CHROME                          |browser                          |
+|set appian url to            |https://appiancoe.vuram.com/suite/sites/case-management-site      |
+|set screenshot path to       |C:\Users\u429130\Desktop\Error Screenshots_Case-Management\TC_003\|
+|set take error screenshots to|true                                                              |
+|set appian version to        |22.4                                                              |
+|set appian locale to         |en_US                                                             |
+|login with username          |Akash@123                                                         |
+
+*!
+!*** Click on requests tab
+
+!|script                                                        |
+|click on menu                 |Requests                        |
+|verify record related action  |CREATE A NEW CASE|is not present|
+|click on record related action|CREATE A NEW CASE               |
+***!
+
+!*** validation of 'Claint number' field
+
+!| script                                                                                          |
+|populate field|Client Number  |with         |1         |partially matching picker field suggestion|
+|wait for      |5              |seconds                                                            |
+|check         |get field      |Client Number|in section|Client Details    |value    |1 - 100001   |
+|clear field   |Client Number                                                                      |
+|populate field|Client Number  |with         |100002    |partially matching picker field suggestion|
+|wait for      |5              |seconds                                                            |
+|check         |get field      |Client Number|in section|Client Details    |value    |2 - 100002   |
+|clear field   |Client Number                                                                      |
+|wait for      |5              |seconds                                                            |
+|populate field|Client Number  |with         |@$#       |partially matching picker field suggestion|
+|wait for      |5              |seconds                                                            |
+|show          |get field      |Client Number|value                                                |
+|verify button |ADD            |is disabled                                                        |
+|clear field   |Client Number                                                                      |
+|wait for      |5              |seconds                                                            |
+|populate field|Client Number  |with         |qwewr     |partially matching picker field suggestion|
+|wait for      |5              |seconds                                                            |
+|verify text   |No Result Found|is present                                                         |
+|clear field   |Client Number                                                                      |
+|populate field|Client Number  |with         |,,,,,,,   |partially matching picker field suggestion|
+|wait for      |5              |seconds                                                            |
+|verify text   |No Result Found|is present                                                         |
+|clear field   |Client Number                                                                      |
+|populate field|Client Number  |with         |----      |partially matching picker field suggestion|
+|wait for      |5              |seconds                                                            |
+|verify text   |No Result Found|is present                                                         |
+
+
+
+!*** validation of ADD Button
+!|script                                                                                      |
+|populate field|Client Number  |with         |1    |partially matching picker field suggestion|
+|wait for      |5              |seconds                                                       |
+|check         |get field      |Client Number|value|1 - 100001                                |
+|verify button |ADD            |is Enabled                                                    |
+|clear field   |Client Number                                                                 |
+|populate field|Client Number  |with         |---- |partially matching picker field suggestion|
+|wait for      |5              |seconds                                                       |
+|verify text   |No Result Found|is present                                                    |
+|verify button |ADD            |is Disabled                                                   |
+
+
+!*** validation of 'Request type' field
+!|script                                                        |
+|click on radio option|Acceptance                               |
+|wait for             |5        |seconds                        |
+|check                |get field|Request Type|value|Acceptance  |
+|click on radio option|Verification                             |
+|check                |get field|Request Type|value|Verification|
+
+
+!*** validation of 'Subject' field
+!|script                                                                                                                                                       |
+|$a=           |get random string|100                                                                                                                          |
+|$b=           |get random string|101                                                                                                                          |
+|$c=           |get random string|99                                                                                                                           |
+|populate field|Subject          |with   |$a                                                                                                                   |
+|wait for      |5                |seconds                                                                                                                      |
+|check not     |get field        |Subject|validation message|The text cannot be longer than 100 characters. 101 characters received.,Invalid Format for subject|
+|populate field|Subject          |with   |$b                                                                                                                   |
+|wait for      |5                |seconds                                                                                                                      |
+|check         |get field        |Subject|validation message|The text cannot be longer than 100 characters. 101 characters received.,Invalid Format for subject|
+|populate field|Subject          |with   |$c                                                                                                                   |
+|wait for      |5                |seconds                                                                                                                      |
+|check not     |get field        |Subject|validation message|The text cannot be longer than 100 characters. 101 characters received.,Invalid Format for subject|
+|populate field|Subject          |with   |@#$                                                                                                                  |
+|check         |get field        |Subject|validation message|Invalid Format for subject                                                                        |
+*!
+!*** validation of 'Description' field
+!|script                                                                                                                                                                    |
+|$d=           |get random string     |3999                                                                                                                                 |
+|$e=           |get random string     |4000                                                                                                                                 |
+|$f=           |get random string     |4001                                                                                                                                 |
+|populate field|Description           |with       |$d                                                                                                                       |
+|wait for      |5                     |seconds                                                                                                                              |
+|check not     |get field             |Description|validation message|The text cannot be longer than 4,000 characters. 4,001 characters received.,Invalid Format for subject|
+|populate field|Description           |with       |$e                                                                                                                       |
+|wait for      |5                     |seconds                                                                                                                              |
+|check not     |get field             |Description|validation message|The text cannot be longer than 4,000 characters. 4,001 characters received.,Invalid Format for subject|
+|populate field|DescriptionDescription|with       |$f                                                                                                                       |
+|wait for      |5                     |seconds                                                                                                                              |
+|check         |get field             |Description|validation message|The text cannot be longer than 4,000 characters. 4,001 characters received.,Invalid Format for subject|
+|populate field|Description           |with       |@#$                                                                                                                      |
+|check         |get field             |Description|validation message|Invalid Format for subject                                                                            |
+*!
+
+!*** Log out and tear down
+
+!| script |
+|logout   |
+|tear down|
+
+*!                                        

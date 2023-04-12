@@ -1,0 +1,63 @@
+---
+Help: Validation of Search option
+Test
+---
+\!***> FitNesse Configurations
+
+!define TEST_SYSTEM {slim}
+!define COMMAND_PATTERN {java -Dlog4j.configuration=file:///${automated.testing.home}/log4j.properties -cp %p %m}
+!path ${automated.testing.home}/**.jar
+*!
+----
+
+
+!*** Initialization and Login to Tempo
+
+!| script                     |com.appiancorp.ps.automatedtest.fixture.TempoFixture              |
+|setup with                   |CHROME                          |browser                          |
+|set appian url to            |https://appiancoe.vuram.com/suite/sites/case-management-site      |
+|set screenshot path to       |C:\Users\u429130\Desktop\Error Screenshots_Case-Management\TC_005\|
+|set take error screenshots to|true                                                              |
+|set appian version to        |22.4                                                              |
+|set appian locale to         |en_US                                                             |
+|login with username          |Akash@123                                                         |
+*!
+---
+
+!** Navigate to records tab
+
+!|script             |
+|click on menu|record|
+*!
+!* User Filter 
+!|script                                                                                                            |
+|populate field with placeholder|Search Request|with  |Akash                                                        |
+|click on button                |SEARCH                                                                             |
+|verify grid                    |[1]           |column|Created By   |row|*|contains value|Akash                     |
+|clear field                    |Search Request                                                                     |
+|populate field with placeholder|Search Request|with  |Sandhya Natarajan                                            |
+|click on button                |SEARCH                                                                             |
+|verify grid                    |[1]           |column|Created By   |row|*|contains value|Sandhya Natarajan         |
+|clear field                    |Search Request                                                                     |
+|populate field with placeholder|Search Request|with  |Divya Shivashankara Murthy                                   |
+|click on button                |SEARCH                                                                             |
+|verify grid                    |[1]           |column|Created By   |row|*|contains value|Divya Shivashankara Murthy|
+|clear field                    |Search Request                                                                     |
+|populate field with placeholder|Search Request|with  |100001                                                       |
+|click on button                |SEARCH                                                                             |
+|verify grid                    |[1]           |column|Client Number|row|*|contains value|100001                    |
+|check not                      |get grid      |[1]   |row count    |0                                              |
+|populate field with placeholder|Search Request|with  |Under Investigation                                          |
+|click on button                |SEARCH                                                                             |
+|verify grid                    |[1]           |column|Status       |row|*|contains value|Under Investigation       |
+|check not                      |get grid      |[1]   |row count    |0                                              |
+
+
+
+
+!** logout and tear down
+
+!|script  |
+|logout   |
+|tear down|
+*!

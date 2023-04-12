@@ -1,0 +1,58 @@
+---
+Help: Validation of Current Assignee Chart
+Test
+---
+\!***> FitNesse Configurations
+
+!define TEST_SYSTEM {slim}
+!define COMMAND_PATTERN {java -Dlog4j.configuration=file:///${automated.testing.home}/log4j.properties -cp %p %m}
+!path ${automated.testing.home}/**.jar
+----
+!3 '''Please follow the directions below to execute the test'''
+----
+!*** Initialization and Login to Tempo
+
+!| script             |com.appiancorp.ps.automatedtest.fixture.TempoFixture        |
+|setup with           |CHROME                       |browser                       |
+|set appian url to    |https://appiancoe.vuram.com/suite/sites/case-management-site|
+|set appian version to|22.4                                                        |
+|set appian locale to |en_US                                                       |
+|login with username  |Akash@123                                                   |
+
+*!
+-----
+
+!*** Navigate to records tab
+
+!| script                 |
+|click on menu|Case Report|
+
+!** Validation of pie chart
+
+!|script                                                                                                                  |
+|populate field                |Pie chart       |with     |Current Assignee                                               |
+|wait for                      |5               |seconds                                                                  |
+|verify chart                  |Current Assignee|is present                                                               |
+|click on pie chart            |Current Assignee|pie slice|D2212CM KBC Acceptance NNP                                     |
+|wait for                      |5               |seconds                                                                  |
+|verify grid                   |[1]             |column   |Priority|row|*|contains value|D2212CM KBC Acceptance NNP       |
+|verify link                   |close           |is present                                                               |
+|click on record related action|D2212CM KBC Acceptance NNP                                                                |
+|Verify text                   |Summary Page    |is present                                                               |
+|click on pie chart            |Current Assignee|pie slice|D2212CM KBC Verification With PUB                              |
+|wait for                      |5               |seconds                                                                  |
+|verify grid                   |[1]             |column   |Priority|row|*|contains value|D2212CM KBC Verification With PUB|
+|verify link                   |close           |is present                                                               |
+|click on record related action|D2212CM KBC Verification With PUB                                                         |
+|Verify text                   |Summary Page    |is present                                                               |
+|wait for                      |5               |seconds                                                                  |
+|click on link                 |close                                                                                     |
+|wait for                      |5               |seconds                                                                  |
+|verify link                   |close           |is present                                                               |
+|verify grid                   |[1]             |column   |Priority|row|*|contains value|D2212CM KBC Verification With PUB|
+
+!*** logout
+!|script  |
+|logout   |
+|tear down|
+*!

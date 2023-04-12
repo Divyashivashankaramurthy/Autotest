@@ -1,0 +1,57 @@
+---
+Help: Validation of STATUS chart
+Test
+---
+\!***> FitNesse Configurations
+
+!define TEST_SYSTEM {slim}
+!define COMMAND_PATTERN {java -Dlog4j.configuration=file:///${automated.testing.home}/log4j.properties -cp %p %m}
+!path ${automated.testing.home}/**.jar
+----
+!3 '''Please follow the directions below to execute the test'''
+
+!|script                                                                                                        |
+|setup Browser|CHROME|locale|en_US|version|22.4|url|https://appiancoe.vuram.com/suite/sites/case-management-site|
+----
+!*** Initialization and Login to Tempo
+
+#!| script             |com.appiancorp.ps.automatedtest.fixture.TempoFixture        |
+|setup with           |CHROME                       |browser                       |
+|set appian url to    |https://appiancoe.vuram.com/suite/sites/case-management-site|
+|set appian version to|22.4                                                        |
+|set appian locale to |en_US                                                       |
+|login with username  |Akash@123                                                   |
+
+*!
+-----
+
+!*** Navigate to records tab
+
+!| script                 |
+|click on menu|Case Report|
+
+!** Validation of Status Chart
+!|script                                                                                                |
+|populate field                |Pie chart   |with     |Status                                           |
+|wait for                      |5           |seconds                                                    |
+|verify chart                  |Status Chart|is present                                                 |
+|click on pie chart            |Status Chart|pie slice|Under Investigation                              |
+|wait for                      |5           |seconds                                                    |
+|verify grid                   |[1]         |column   |Priority|row|*|contains value|Under Investigation|
+|verify link                   |close       |is present                                                 |
+|click on record related action|Under Investigation                                                     |
+|Verify text                   |Summary Page|is present                                                 |
+|wait for                      |5           |seconds                                                    |
+|verify grid                   |[1]         |column   |Priority|row|*|contains value|Under Investigation|
+|verify link                   |close       |is present                                                 |
+|click on link                 |close                                                                   |
+
+
+!*** logout and tear down
+
+!|script  |
+|logout   |
+|tear down|
+
+
+*!

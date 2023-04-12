@@ -1,0 +1,64 @@
+---
+Help: Raising request using test Variables
+Test
+---
+!***> FitNesse Configurations
+
+!define TEST_SYSTEM {slim}
+!define COMMAND_PATTERN {java -Dlog4j.configuration=file:///${automated.testing.home}/log4j.properties -cp %p %m}
+!path ${automated.testing.home}/**.jar
+*!
+----
+----
+
+
+!** Login using Scenario
+!|script                                        |com.appiancorp.ps.automatedtest.fixture.TempoFixture|
+|setup for test script for browser with Username|divyasm                                             |
+
+
+*!
+!*** Click on the tab
+
+!|script                  |
+|click on menu|Order Parts|
+*!
+------
+
+!*** Initialization and assigning values to test variable
+!|script                                                                                        |
+|set test variable|delivery|with|{"DeliverTo":"1234rt","Building":"Bo Burbank","Lab":"Banglore"}|
+*!
+
+!*** Raise a Request as an Employee
+
+!|script                                                                                                                                         |
+|click on checkbox option     |[1]                                                                                                               |
+|populate field               |[2]                     |with    |CSBG                                                                            |
+|wait for                     |5                       |seconds                                                                                  |
+|click on radio option        |1000                                                                                                              |
+|click on radio option        |630100                                                                                                            |
+|populate field               |IO                      |with    |09           |partially matching picker field suggestion                        |
+|wait for                     |5                       |seconds                                                                                  |
+|verify field                 |Description[1]          |contains|Internal order for audit purpose 3                                              |
+|populate field               |CC                      |with    |0            |partially matching picker field suggestion                        |
+|verify field                 |Description[2]          |contains|Taiwan                                                                          |
+|wait for                     |5                       |seconds                                                                                  |
+|populate field               |Deliver To              |with    |tv!delivery.DeliverTo                                                           |
+|populate field               |Building                |with    |tv!delivery.Building                                                            |
+|populate field               |Cube/Office/Lab Location|with    |tv!delivery.Lab                                                                 |
+|wait for                     |5                       |seconds                                                                                  |
+|populate grid                |[1]                     |column  |Part Number  |row|[1]|with|0         |partially matching picker field suggestion|
+|populate grid                |[1]                     |column  |Qty          |row|[1]|with|2         |                                          |
+|populate grid                |[1]                     |column  |Need Date    |row|[1]|with|05/04/2023|                                          |
+|verify button                |Proceed to Checkout     |is disabled                                                                              |
+|set take error screenshots to|false                                                                                                             |
+|populate grid                |[1]                     |column  |Delivery Type|row|[1]|with|Stock                                                |
+|wait for                     |5                       |seconds                                                                                  |
+|verify button                |Proceed to Checkout     |is enabled                                                                               |
+|click on button              |Proceed to Checkout                                                                                               |
+|populate field               |Short Order Description |with    |wewrwt                                                                          |
+|wait for                     |5                       |seconds                                                                                  |
+|click on button              |Proceed to Checkout                                                                                               |
+|click on button              |ok                                                                                                                |
+*!

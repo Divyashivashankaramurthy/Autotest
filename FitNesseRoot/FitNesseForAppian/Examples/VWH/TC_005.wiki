@@ -1,0 +1,121 @@
+---
+Help: Field validation
+Test
+---
+!***> FitNesse Configurations
+
+!define TEST_SYSTEM {slim}
+!define COMMAND_PATTERN {java -Dlog4j.configuration=file:///${automated.testing.home}/log4j.properties -cp %p %m}
+!path ${automated.testing.home}/**.jar
+!define c49{null}, c50{null}, c51{null},c52{null}
+!define $V {The text cannot be longer than 100 characters. 101 characters received.
+Enter only valid characters}
+*!
+----
+
+!** Senario
+!|script                                        |com.appiancorp.ps.automatedtest.fixture.TempoFixture|
+|setup for test script for browser with Username|divyasm                                             |
+*!
+!*** Click on the tab
+
+!|script                  |
+|click on menu|Order Parts|
+
+
+*!
+!*** Validation of Dummy reservation checkbox
+!|script                                                             |
+|click on checkbox option|[1]                                        |
+|verify text             |Dummy Reservation is checked|is present    |
+|wait for                |5                           |seconds       |
+|click on checkbox option|[1]                                        |
+|wait for                |5                           |seconds       |
+|verify text             |Dummy Reservation is checked|is not present|
+*!
+
+
+!**** Validation of Product Group
+!|script                                        |
+|populate field|[2]      |with    |CSBG         |
+|wait for      |5        |seconds               |
+|verify field  |[2]      |contains|CSBG         |
+|check not     |get field|[2]     |value|Villach|
+|populate field|[2]      |with    |Electrofill  |
+|wait for      |5        |seconds               |
+|verify field  |[2]      |contains|Electrofill  |
+|populate field|[2]      |with    |Villach      |
+|wait for      |5        |seconds               |
+|verify field  |[2]      |contains|Villach      |
+|populate field|[2]      |with    |PECVD        |
+|wait for      |5        |seconds               |
+|verify field  |[2]      |contains|PECVD        |
+*!
+
+!*** Getting random Alphabets
+
+!|script                            |
+|$c49=|get random alphabet string|49|
+|$c50=|get random alphabet string|50|
+|$c51=|get random alphabet string|51|
+|$c52=|get random alphabet string|52|
+*!
+
+!**** Validation of Deliver To text field using 'get random alphabets'
+
+!|script                                                   |
+|populate field|Deliver To|with      |$c49                 |
+|wait for      |5         |seconds                         |
+|check not     |get field |Deliver To|validation message|$V|
+|populate field|Deliver To|with      |$c50                 |
+|wait for      |5         |seconds                         |
+|check not     |get field |Deliver To|validation message|$V|
+|populate field|Deliver To|with      |$c51                 |
+|wait for      |5         |seconds                         |
+|check         |get field |Deliver To|validation message|$V|
+|wait for      |5         |seconds                         |
+|populate field|Deliver To|with      |$c101                |
+|wait for      |5         |seconds                         |
+|check         |get field |Deliver To|validation message|$V|
+|wait for      |5         |seconds                         |
+
+*!
+
+!**** Validation of 'Building'   text field
+!|script                                                  |
+|populate field|Building |with      |$c49                 |
+|wait for      |5        |seconds                         |
+|check not     |get field|Deliver To|validation message|$V|
+|populate field|Building |with      |$c50                 |
+|wait for      |5        |seconds                         |
+|check not     |get field|Deliver To|validation message|$V|
+|populate field|Building |with      |$c51                 |
+|wait for      |5        |seconds                         |
+|check         |get field|Deliver To|validation message|$V|
+|populate field|Building |with      |$c52                 |
+|check         |get field|Deliver To|validation message|$V|
+|wait for      |5        |seconds                         |
+
+*!
+
+!**** Validation of 'Cube/Office/Lab Location' text field
+!|script                                                                 |
+|populate field|Cube/Office/Lab Location|with      |$c49                 |
+|wait for      |5                       |seconds                         |
+|check not     |get field               |Deliver To|validation message|$V|
+|populate field|Cube/Office/Lab Location|with      |$c50                 |
+|wait for      |5                       |seconds                         |
+|check not     |get field               |Deliver To|validation message|$V|
+|populate field|Cube/Office/Lab Location|with      |$c51                 |
+|wait for      |5                       |seconds                         |
+|check         |get field               |Deliver To|validation message|$V|
+|populate field|Cube/Office/Lab Location|with      |$c52                 |
+|check         |get field               |Deliver To|validation message|$V|
+|wait for      |5                       |seconds                         |
+*!
+
+!*** Log out and tear down
+!| script |
+|logout   |
+|tear down|
+*!

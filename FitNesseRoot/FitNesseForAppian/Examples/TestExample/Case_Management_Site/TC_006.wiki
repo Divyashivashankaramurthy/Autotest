@@ -1,0 +1,74 @@
+---
+Help: Validation of user filters
+Test
+---
+\!***> FitNesse Configurations
+
+!define TEST_SYSTEM {slim}
+!define COMMAND_PATTERN {java -Dlog4j.configuration=file:///${automated.testing.home}/log4j.properties -cp %p %m}
+!path ${automated.testing.home}/**.jar
+----
+!3 '''Please follow the directions below to execute the test'''
+----
+!*** Initialization and Login to Tempo
+
+!| script                     |com.appiancorp.ps.automatedtest.fixture.TempoFixture              |
+|setup with                   |CHROME                          |browser                          |
+|set appian url to            |https://appiancoe.vuram.com/suite/sites/case-management-site      |
+|set screenshot path to       |C:\Users\u429130\Desktop\Error Screenshots_Case-Management\TC_006\|
+|set take error screenshots to|true                                                              |
+|set appian version to        |22.4                                                              |
+|set appian locale to         |en_US                                                             |
+|login with username          |Akash@123                                                         |
+
+*!
+-----
+
+!*** Navigate to records tab
+
+!| script            |
+|click on menu|record|
+
+*!
+!*** User filter priority
+
+!| script                                                                       |
+|populate record type user filter|Priority|with  |High                          |
+|wait for                        |5       |seconds                              |
+|verify grid                     |[1]     |column|Priority|row|*|contains|High  |
+|wait for                        |5       |seconds                              |
+|clear record type user filter   |Priority                                      |
+|populate record type user filter|Priority|with  |Low                           |
+|verify grid                     |[1]     |column|Priority|row|*|contains|Low   |
+|wait for                        |5       |seconds                              |
+|clear record type user filter   |Priority                                      |
+|populate record type user filter|Priority|with  |Medium                        |
+|verify grid                     |[1]     |column|Priority|row|*|contains|Medium|
+|clear record type user filter   |Priority                                      |
+
+*!
+!*** User filter Status
+
+!| script                                                                                       |
+|populate record type user filter|status  |with  |under investigation                           |
+|wait for                        |5       |seconds                                              |
+|verify grid                     |[1]     |column|Status   |row|[1]|contains|Under investigation|
+|wait for                        |5       |seconds                                              |
+|clear record type user filter   |status                                                        |
+|populate record type user filter|status  |with  |Waiting for info                              |
+|check                           |get grid|[1]   |row count|0                                   |
+|clear record type user filter   |status                                                        |
+|populate record type user filter|status  |with  |Closed                                        |
+|check                           |get grid|[1]   |row count|0                                   |
+|clear record type user filter   |status                                                        |
+|populate record type user filter|status  |with  |New info available                            |
+|check                           |get grid|[1]   |row count|0                                   |
+
+*!
+!*** logout and tear down
+
+!| script |
+|logout   |
+|tear down|
+
+*!

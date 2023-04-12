@@ -1,0 +1,47 @@
+---
+Help: Login using invalid credentials
+Test
+---
+!***> FitNesse Configurations
+
+!define TEST_SYSTEM {slim}
+!define COMMAND_PATTERN {java -Dlog4j.configuration=file:///${automated.testing.home}/log4j.properties -cp %p %m}
+!path ${automated.testing.home}/**.jar
+*!
+----
+!3 '''Please follow the directions below to execute the test'''
+
+
+----
+!*** Login using valid Username but invalid Password
+
+!| script             |com.appiancorp.ps.automatedtest.fixture.TempoFixture                                              |
+|setup with           |CHROME             |browser                                                                       |
+|set appian url to    |https://appiancoe.vuram.com/suite/sites/as_virtualwarehouse                                       |
+|set appian version to|22.4                                                                                              |
+|set appian locale to |en_US                                                                                             |
+|reject               |login with username|Akash@123|and password               |12345                                   |
+|ensure               |verify field       |Password |contains validation message|The username/password entered is invalid|
+
+----
+!*** Login using invalid Username but valid Password
+
+!| script             |com.appiancorp.ps.automatedtest.fixture.TempoFixture                                             |
+|setup with           |CHROME             |browser                                                                      |
+|set appian url to    |https://appiancoe.vuram.com/suite/sites/as_virtualwarehouse                                      |
+|set appian version to|22.4                                                                                             |
+|set appian locale to |en_US                                                                                            |
+|reject               |login with username|Akash@12|and password               |divy@123A                               |
+|ensure               |verify field       |Password|contains validation message|The username/password entered is invalid|
+
+!*** Login using invalid credentials
+
+!| script             |com.appiancorp.ps.automatedtest.fixture.TempoFixture                                             |
+|setup with           |CHROME             |browser                                                                      |
+|set appian url to    |https://appiancoe.vuram.com/suite/sites/as_virtualwarehouse                                      |
+|set appian version to|22.4                                                                                             |
+|set appian locale to |en_US                                                                                            |
+|reject               |login with username|Akash@12|and password               |12345                                   |
+|ensure               |verify field       |Password|contains validation message|The username/password entered is invalid|
+
+

@@ -1,0 +1,60 @@
+---
+Help: Sorting the records by different values
+Test
+---
+!***> FitNesse Configurations
+
+!define TEST_SYSTEM {slim}
+!define COMMAND_PATTERN {java -Dlog4j.configuration=file:///${automated.testing.home}/log4j.properties -cp %p %m}
+!path ${automated.testing.home}/**.jar
+*!
+----
+!3 '''Please follow the directions below to execute the test'''
+
+
+----
+!*** Initialization and Login to Tempo
+
+!| script             |com.appiancorp.ps.automatedtest.fixture.TempoFixture        |
+|setup with           |CHROME                       |browser                       |
+|set appian url to    |https://appiancoe.vuram.com/suite/sites/case-management-site|
+|set appian version to|22.4                                                        |
+|set appian locale to |en_US                                                       |
+|login with username  |Akash@123                                                   |
+*!
+---
+
+!** Navigate to records tab
+
+!|script             |
+|click on menu|record|
+*!
+!*** Sorting records
+!|script                                     |
+|sort record grid by column|Request Number   |
+|wait for                  |5    |seconds    |
+|sort record grid by column|Request Id       |
+|wait for                  |5    |seconds    |
+|sort record grid by column|Client Name      |
+|wait for                  |5    |seconds    |
+|sort record grid by column|Status           |
+|wait for                  |5    |seconds    |
+|sort record grid by column|Priority         |
+|wait for                  |5    |seconds    |
+|sort record grid by column|Current Assignee |
+|wait for                  |5    |seconds    |
+|sort record grid by column|Original Assignee|
+|wait for                  |5    |seconds    |
+|sort record grid by column|Created By       |
+
+
+!* Logout and tear down
+
+!|script  |
+|logout   |
+|tear down|
+
+
+
+
+

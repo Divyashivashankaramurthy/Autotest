@@ -1,0 +1,131 @@
+---
+Help: Raising a request by providing valid data in all the mandatory fiields
+Test
+---
+!***> FitNesse Configurations
+
+!define TEST_SYSTEM {slim}
+!define COMMAND_PATTERN {java -Dlog4j.configuration=file:///${automated.testing.home}/log4j.properties -cp %p %m}
+!path ${automated.testing.home}/**.jar
+*!
+----
+----
+!*** Login as Employee
+
+!** Senario
+!|script                                        |com.appiancorp.ps.automatedtest.fixture.TempoFixture|
+|setup for test script for browser with Username|divyasm                                             |
+*!
+
+*!
+!*** Click on the tab
+
+!|script                  |
+|click on menu|Order Parts|
+*!
+------
+
+!*** Raise a Request as an Employee
+
+!|script                                                                                                                                         |
+|click on checkbox option     |[1]                                                                                                               |
+|populate field               |[2]                     |with    |CSBG                                                                            |
+|wait for                     |5                       |seconds                                                                                  |
+|click on radio option        |1000                                                                                                              |
+|click on radio option        |630100                                                                                                            |
+|populate field               |IO                      |with    |09           |partially matching picker field suggestion                        |
+|wait for                     |5                       |seconds                                                                                  |
+|verify field                 |Description[1]          |contains|Internal order for audit purpose 3                                              |
+|populate field               |CC                      |with    |0            |partially matching picker field suggestion                        |
+|verify field                 |Description[2]          |contains|Taiwan                                                                          |
+|wait for                     |5                       |seconds                                                                                  |
+|populate field               |Deliver To              |with    |5th cross                                                                       |
+|populate field               |Building                |with    |pagsts                                                                          |
+|populate field               |Cube/Office/Lab Location|with    |Banglore                                                                        |
+|wait for                     |5                       |seconds                                                                                  |
+|populate grid                |[1]                     |column  |Part Number  |row|[1]|with|0         |partially matching picker field suggestion|
+|populate grid                |[1]                     |column  |Qty          |row|[1]|with|2         |                                          |
+|populate grid                |[1]                     |column  |Need Date    |row|[1]|with|05/04/2023|                                          |
+|verify button                |Proceed to Checkout     |is disabled                                                                              |
+|set take error screenshots to|false                                                                                                             |
+|populate grid                |[1]                     |column  |Delivery Type|row|[1]|with|Stock                                                |
+|wait for                     |5                       |seconds                                                                                  |
+|verify button                |Proceed to Checkout     |is enabled                                                                               |
+|click on button              |Proceed to Checkout                                                                                               |
+|populate field               |Short Order Description |with    |wewrwt                                                                          |
+|wait for                     |5                       |seconds                                                                                  |
+|click on button              |Proceed to Checkout                                                                                               |
+|click on button              |ok                                                                                                                |
+
+*!
+
+!*** Logout as Employee
+
+!| script|
+|logout  |
+
+*!
+
+!** login as Manager
+
+!|script                       |
+|login with username|Anjali@123|
+
+!*** Click on the tab
+
+!|script           |
+|click on menu|Task|
+
+
+!*** Approve a request as a Manager
+!|script                                                  |
+|click on grid                |[1]    |column|Task|row|[1]|
+|verify button                |Approve|is disabled        |
+|set take error screenshots to|false                      |
+|wait for                     |5      |seconds            |
+|click on button              |ACCEPT                     |
+|wait for                     |5      |seconds            |
+|verify button                |Approve|is enabled         |
+|set take error screenshots to|false                      |
+|click on button              |APPROVE                    |
+
+
+
+!*** Log out and tear down
+
+!|script|
+|logout |
+
+*!
+
+!*** Login as Finance Admin
+!|script                      |
+|login with username|Kavya@123|
+
+!*** Click on the tab
+
+!|script           |
+|click on menu|Task|
+
+
+!*** Approve a request as a Manager
+!|script                                                  |
+|click on grid                |[1]    |column|Task|row|[1]|
+|verify button                |Approve|is disabled        |
+|set take error screenshots to|false                      |
+|click on button              |ACCEPT                     |
+|wait for                     |5      |seconds            |
+|verify button                |Approve|is enabled         |
+|set take error screenshots to|false  |                   |
+|click on button              |APPROVE                    |
+
+
+
+!*** Log out and tear down
+
+!|script  |
+|logout   |
+|tear down|
+*!
+
+

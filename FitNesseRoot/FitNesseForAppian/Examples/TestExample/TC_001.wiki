@@ -1,0 +1,79 @@
+---
+Help: Charts_Opportunity Tracker
+Test
+---
+!***> FitNesse Configurations
+
+!define TEST_SYSTEM {slim}
+!define COMMAND_PATTERN {java -Dlog4j.configuration=file:///${automated.testing.home}/log4j.properties -cp %p %m}
+!path ${automated.testing.home}/**.jar
+
+*!
+----
+
+!*** Login using valid credentials
+
+!| script             |com.appiancorp.ps.automatedtest.fixture.TempoFixture                  |
+|setup with           |CHROME                            |browser                            |
+|set appian url to    |https://appiancoe.vuram.com/suite/sites/d2207vgotm-opportunity-tracker|
+|set appian version to|22.4                                                                  |
+|set appian locale to |en_US                                                                 |
+|login with username  |Anjali@123                                                            |
+
+*!
+!*** Click on the Tab
+
+!|script             |
+|click on menu|TRENDS|
+*! 
+
+!*** Validation of Pie Chart_'Type'
+!|script                                                      |
+|populate field    |[1]            |with     |Type and Channel|
+|ensure            |verify chart   |Type     |is present      |
+|ensure            |verify chart   |Channel  |is present      |
+|click on pie chart|Type           |pie slice|[3]             |
+|wait for          |5              |seconds                   |
+|$R3=              |get grid       |[1]      |row count       |
+|$P3=              |get gauge field|[3]      |percentage      |
+|wait for          |5              |seconds                   |
+|click on pie chart|Type           |pie slice|[4]             |
+|$R4=              |get grid       |[1]      |row count       |
+|click on pie chart|Type           |pie slice|[2]             |
+|wait for          |5              |seconds                   |
+|$R2=              |get grid       |[1]      |row count       |
+|click on pie chart|Type           |pie slice|[1]             |
+|wait for          |5              |seconds                   |
+|$R1=              |get grid       |[1]      |row count       |
+
+
+*!
+
+!*** Validation of Pie Chart_'Channel'
+!|script                                                 |
+|reject            |verify chart|Channel  |is not present|
+|click on pie chart|Channel     |pie slice|[1]           |
+|wait for          |5           |seconds                 |
+|show              |get grid    |[1]      |row count     |
+|wait for          |5           |seconds                 |
+|click on pie chart|Channel     |pie slice|[2]           |
+|show              |get grid    |[1]      |row count     |
+|click on pie chart|Channel     |pie slice|[3]           |
+|wait for          |5           |seconds                 |
+|show              |get grid    |[1]      |row count     |
+|click on pie chart|Channel     |pie slice|[4]           |
+|wait for          |5           |seconds                 |
+|show              |get grid    |[1]      |row count     |
+|click on pie chart|Channel     |pie slice|[5]           |
+|wait for          |5           |seconds                 |
+|show              |get grid    |[1]      |row count     |
+|click on pie chart|Channel     |pie slice|[6]           |
+|wait for          |5           |seconds                 |
+|show              |get grid    |[1]      |row count     |
+*!
+!*** Logout and Tear down
+
+!|script  |
+|logout   |
+|tear down|
+*!

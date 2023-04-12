@@ -1,0 +1,72 @@
+---
+Test
+---
+\!***> FitNesse Configurations
+
+!define TEST_SYSTEM {slim}
+!define COMMAND_PATTERN {java -Dlog4j.configuration=file:///${automated.testing.home}/log4j.properties -cp %p %m}
+!path ${automated.testing.home}/**.jar
+----
+!3 '''Please follow the directions below to execute the test'''
+----
+!*** Initialization and Login to Tempo
+
+!| script             |com.appiancorp.ps.automatedtest.fixture.TempoFixture        |
+|setup with           |CHROME                       |browser                       |
+|set appian url to    |https://appiancoe.vuram.com/suite/sites/case-management-site|
+|set appian version to|22.4                                                        |
+|set appian locale to |en_US                                                       |
+|login with username  |Akash@123                                                   |
+
+*!
+-----
+
+!*** Navigate to records tab
+
+!| script            |
+|click on menu|record|
+
+*!
+!*** User filter priority
+
+!| script                                                |
+|populate record type user filter|Priority|with  |High   |
+|wait for                        |5       |seconds       |
+|verify text                     |High    |is present    |
+|verify text                     |Low     |is not present|
+|verify text                     |Medium  |is not present|
+|wait for                        |5       |seconds       |
+|populate record type user filter|Priority|with  |Low    |
+|verify text                     |Medium  |is not present|
+|populate record type user filter|Priority|with  |Medium |
+|verify text                     |High    |is present    |
+|verify text                     |Low     |is present    |
+|verify text                     |Medium  |is present    |
+|clear record type user filter   |Priority               |
+
+*!
+!*** User filter Status
+
+!| script                                                                     |
+|populate record type user filter|status             |with|under investigation|
+|wait for                        |5                  |seconds                 |
+|verify text                     |Under Investigation|is present              |
+|verify text                     |Waiting for Info   |is not present          |
+|verify text                     |Closed             |is not present          |
+|wait for                        |5                  |seconds                 |
+|clear record type user filter   |status                                      |
+|populate record type user filter|status             |with|waiting for info   |
+|verify text                     |Under Investigation|is not present          |
+|verify text                     |Waiting for Info   |is present              |
+|verify text                     |Closed             |is not present          |
+|populate record type user filter|status             |with|closed             |
+|clear record type user filter   |status                                      |
+
+*!
+!*** logout and tear down
+
+!| script |
+|logout   |
+|tear down|
+
+*!

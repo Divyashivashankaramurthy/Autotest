@@ -1,0 +1,39 @@
+---
+Help: Validation of Bar Chart
+Test
+---
+!***> FitNesse Configurations
+
+!define TEST_SYSTEM {slim}
+!define COMMAND_PATTERN {java -Dlog4j.configuration=file:///${automated.testing.home}/log4j.properties -cp %p %m}
+!path ${automated.testing.home}/**.jar
+
+*!
+----
+
+!*** Login using valid credentials
+
+!| script             |com.appiancorp.ps.automatedtest.fixture.TempoFixture             |
+|setup with           |CHROME                          |browser                         |
+|set appian url to    |https://appiancoe.vuram.com/suite/sites/d2207mgpt-project-tracker|
+|set appian version to|22.4                                                             |
+|set appian locale to |en_US                                                            |
+|login with username  |Anjali@123                                                       |
+
+*!
+!*** Click on the Tab
+
+!|script             |
+|click on menu|TRENDS|
+*! 
+
+!*** Validation of Pie Chart_'Type'
+!|script                                                         |
+|populate field       |[1]              |with  |Solution Traction|
+|verify chart         |Solution Traction|is present              |
+|click on column chart|[1]              |column|MQL              |
+|click on column chart|[1]              |column|[2]              |
+|click on column chart|[1]              |column|[3]              |
+
+*!
+

@@ -1,0 +1,10 @@
+!3 To use out of the box functionality, do not update the scenarios below
+
+!*** Setup customizable for browser, locale, version, and URL
+!|scenario            |setup for test script for browser with Username  |Username |
+|setup with           |CHROME                                           |browser  |
+|set appian url to    |https://appiancoe.vuram.com/suite/sites/as_virtualwarehouse|
+|set appian version to|22.4                                                       |
+|set appian locale to |en_US                                                      |
+|login with username  |@Username                                                  |
+***!

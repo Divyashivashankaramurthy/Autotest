@@ -1,0 +1,33 @@
+---
+Help: Regex, senarios
+Test
+---
+!***> FitNesse Configurations
+
+!define TEST_SYSTEM {slim}
+!define COMMAND_PATTERN {java -Dlog4j.configuration=file:///${automated.testing.home}/log4j.properties -cp %p %m}
+!path ${automated.testing.home}/**.jar
+*!
+----
+
+!*** Login using valid credentials
+
+!| script             |com.appiancorp.ps.automatedtest.fixture.TempoFixture       |
+|setup with           |CHROME                       |browser                      |
+|set appian url to    |https://appiancoe.vuram.com/suite/sites/as_virtualwarehouse|
+|set appian version to|22.4                                                       |
+|set appian locale to |en_US                                                      |
+|login with username  |Akash@123                                                  |
+
+*!
+!*** Click on the Record
+
+!|script                                                               |
+|click on menu|Order Parts                                             |
+|wait for     |5        |seconds                                       |
+|$A=          |get regex|deliver to|group|1|from field|Deliver To|value|
+
+*!
+
+
+

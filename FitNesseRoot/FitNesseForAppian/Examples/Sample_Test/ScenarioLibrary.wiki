@@ -1,0 +1,21 @@
+!3 To use out of the box functionality, do not update the scenarios below
+
+!*** Setup customizable for browser, locale, version, and URL
+!|scenario            |setup for test script for browser                           |
+|setup with           |CHROME                       |browser                       |
+|set appian url to    |https://appiancoe.vuram.com/suite/sites/case-management-site|
+|set appian version to|22.4                                                        |
+|set appian locale to |en_US                                                       |
+|login with username  |Akash@123                                                   |
+***!
+
+!*** Senario to provide user details
+!|scenario     |Enter Case Details with Request Type|RequestType|with Subject|Subject|with Description|Description|with Priority|Priority|
+|populate field|Request Type                        |with       |@RequestType                                                            |
+|populate field|Subject                             |with       |@Subject                                                                |
+|populate field|Description                         |with       |@Description                                                            |
+|populate field|Priority                            |with       |@Priority                                                               |
+*!
+
+
+

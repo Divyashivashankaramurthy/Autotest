@@ -1,0 +1,68 @@
+---
+Help: Validation of Delete icon and Add row link
+Test
+---
+!***> FitNesse Configurations
+
+!define TEST_SYSTEM {slim}
+!define COMMAND_PATTERN {java -Dlog4j.configuration=file:///${automated.testing.home}/log4j.properties -cp %p %m}
+!path ${automated.testing.home}/**.jar
+*!
+----
+----
+!*** Login as Employee
+
+!** Senario
+!|script                                        |com.appiancorp.ps.automatedtest.fixture.TempoFixture|
+|setup for test script for browser with Username|Akash@123                                           |
+*!
+
+*!
+!*** Click on the tab
+
+!|script                  |
+|click on menu|Order Parts|
+*!
+------
+
+!*** Raise a Request as an Employee
+
+!|script                                                                                                                                  |
+|populate grid                |[1]                |column|Part Number  |row|[1]|with|0         |partially matching picker field suggestion|
+|populate grid                |[1]                |column|Qty          |row|[1]|with|2         |                                          |
+|populate grid                |[1]                |column|Need Date    |row|[1]|with|05/04/2023|                                          |
+|verify button                |Proceed to Checkout|is disabled                                                                            |
+|set take error screenshots to|false                                                                                                      |
+|populate grid                |[1]                |column|Delivery Type|row|[1]|with|Stock                                                |
+
+
+!*** Adding 2nd row
+
+!|script                                                                                                                                  |
+|wait for                     |5                  |seconds                                                                                |
+|click on grid                |[1]                |add row link                                                                           |
+|populate grid                |[1]                |column|Part Number  |row|[2]|with|076       |partially matching picker field suggestion|
+|populate grid                |[1]                |column|Qty          |row|[2]|with|3         |                                          |
+|populate grid                |[1]                |column|Need Date    |row|[2]|with|07/04/2023|                                          |
+|verify button                |Proceed to Checkout|is disabled                                                                            |
+|set take error screenshots to|false                                                                                                      |
+|populate grid                |[1]                |column|Delivery Type|row|[2]|with|Requestor                                            |
+|check                        |get grid           |[1]   |row count    |2                                                                 |
+
+
+*!
+
+!*** Validation of Delete Icon
+!|script                                        |
+|click on grid|[1]     |column|[14]     |row|[2]|
+|wait for     |5       |seconds                 |
+|check        |get grid|[1]   |row count|1      |
+
+*!
+
+!*** Log out and tear down
+
+!|script  |
+|logout   |
+|tear down|
+*!

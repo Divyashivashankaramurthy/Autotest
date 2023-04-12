@@ -1,0 +1,191 @@
+---
+Help: Validation of data flow between all the Users
+Test
+---
+!***> FitNesse Configurations
+
+!define TEST_SYSTEM {slim}
+!define COMMAND_PATTERN {java -Dlog4j.configuration=file:///${automated.testing.home}/log4j.properties -cp %p %m}
+!path ${automated.testing.home}/**.jar
+*!
+----
+----
+!*** Login as Employee
+
+!** Senario
+!|script                                        |com.appiancorp.ps.automatedtest.fixture.TempoFixture|
+|setup for test script for browser with Username|Akash@123                                           |
+*!
+
+*!
+!*** Click on the tab
+
+!|script                  |
+|click on menu|Order Parts|
+*!
+------
+
+!*** Raise a Request as an Employee
+
+!|script                                                                                                                                                                                                   |
+|$DR=                             |get field                                 |Dummy Reservation                |value                                                                                      |
+|$PG=                             |get field                                 |Product Group                    |value                                                                                      |
+|wait for                         |5                                         |seconds                                                                                                                      |
+|$PlG=                            |get field                                 |Plant Group                      |value                                                                                      |
+|$GL=                             |get field                                 |GL Account                       |value                                                                                      |
+|$IO=                             |get field                                 |IO                               |value                                                                                      |
+|$D1=                             |get field                                 |Description[1]                   |value                                                                                      |
+|$CC=                             |get field                                 |CC                               |value                                                                                      |
+|$D2=                             |get field                                 |Description[2]                   |value                                                                                      |
+|$SP=                             |get field                                 |Sydney Project                   |value                                                                                      |
+|$Q=                              |get field                                 |Quick turn quartz/silicon/SiC ERF|value                                                                                      |
+|$TD=                             |get field                                 |Tool Down                        |value                                                                                      |
+|$DT=                             |get field                                 |Deliver To                       |value                                                                                      |
+|$B=                              |get field                                 |Building                         |value                                                                                      |
+|$C=                              |get field                                 |Cube/Office/Lab Location         |value                                                                                      |
+|$LI=                             |get grid                                  |[1]                              |column       |LI            |row|[1] |value                                                |
+|populate grid                    |[1]                                       |column                           |Part Number  |row           |[1]|with|0         |partially matching picker field suggestion|
+|wait for                         |5                                         |seconds                                                                                                                      |
+|$PN=                             |get grid                                  |[1]                              |column       |Product Number|row|[1] |value                                                |
+|$D3=                             |get grid                                  |[1]                              |column       |Description   |row|[1] |value                                                |
+|$CM=                             |get grid                                  |[1]                              |column       |Commodity     |row|[1] |value                                                |
+|$SC=                             |get grid                                  |[1]                              |column       |Std Cost      |row|[1] |value                                                |
+|populate grid                    |[1]                                       |column                           |Qty          |row           |[1]|with|2         |                                          |
+|populate grid                    |[1]                                       |column                           |Need Date    |row           |[1]|with|05/05/2023|                                          |
+|$AF=                             |get grid                                  |[1]                              |column       |Addtl. Fee    |row|[1] |value                                                |
+|$TC=                             |get grid                                  |[1]                              |column       |Total Cost    |row|[1] |value                                                |
+|$CR=                             |get grid                                  |[1]                              |column       |Critical      |row|[1] |value                                                |
+|verify button                    |Proceed to Checkout                       |is disabled                                                                                                                  |
+|populate grid                    |[1]                                       |column                           |Delivery Type|row           |[1]|with|Stock                                                |
+|wait for                         |5                                         |seconds                                                                                                                      |
+|verify button                    |Proceed to Checkout                       |is enabled                                                                                                                   |
+|populate field                   |Short Order Description                   |with                             |qweert                                                                                     |
+|click on button                  |Proceed to Checkout                                                                                                                                                     |
+|wait for                         |5                                         |seconds                                                                                                                      |
+|click on button                  |Proceed to Checkout                                                                                                                                                     |
+|verify confirmation dialog header|Your order has been submitted successfully|is present                                                                                                                   |
+|$a=                              |get form title                                                                                                                                                          |
+|click on button                  |ok                                                                                                                                                                      |
+
+*!
+
+!*** Logout as Employee
+
+!| script|
+|logout  |
+
+*!
+
+!*** Login as Manager
+!|script                       |
+|login with username|Anjali@123|
+*!
+
+!*** Validation of record contents
+!|script                                                                                                                  |
+|click on menu|Task                                                                                                       |
+|click on grid|[1]      |column                           |Task  |row          |[1]                                       |
+|check        |get field|Dummy Reservation                |value |$DR                                                     |
+|check        |get field|Product Group                    |value |$PG                                                     |
+|wait for     |5        |seconds                                                                                          |
+|check        |get field|IO                               |value |$IO                                                     |
+|wait for     |5        |seconds                                                                                          |
+|check        |get field|CC                               |value |$CC                                                     |
+|wait for     |5        |seconds                                                                                          |
+|check        |get field|Plant Group                      |value |$PlG                                                    |
+|wait for     |5        |seconds                                                                                          |
+|check        |get field|GL Account                       |value |$GL                                                     |
+|wait for     |5        |seconds                                                                                          |
+|check        |get field|Short Order Description          |value |qweert                                                  |
+|check        |get field|Description[1]                   |value |$D1                                                     |
+|check        |get field|Description[2]                   |value |$D2                                                     |
+|check        |get field|Sydney Project                   |value |$SP                                                     |
+|check        |get field|Quick turn quartz/silicon/SiC ERF|value |$Q                                                      |
+|check        |get field|Tool Down                        |value |$TD                                                     |
+|check        |get field|Deliver To                       |value |$DT                                                     |
+|check        |get field|Building                         |value |$B                                                      |
+|check        |get field|Cube/Office/Lab Location         |value |$C                                                      |
+|check        |get grid |[1]                              |column|LI           |row|[1]|value|$LI                         |
+|check        |get grid |[1]                              |column|Part Number  |row|[1]|value|$PN                         |
+|check        |get grid |[1]                              |column|Description  |row|[1]|value|$D3                         |
+|check        |get grid |[1]                              |column|Commodity    |row|[1]|value|$CM                         |
+|check        |get grid |[1]                              |column|Std Cost     |row|[1]|value|$SC                         |
+|check        |get grid |[1]                              |column|Qty          |row|[1]|value|2                           |
+|check        |get grid |[1]                              |column|Need Date    |row|[1]|value|05/05/2023 5:30 AM GMT=05:30|
+|check        |get grid |[1]                              |column|Addtl. Fee   |row|[1]|value|$AF                         |
+|check        |get grid |[1]                              |column|Total Cost   |row|[1]|value|$TC                         |
+|check        |get grid |[1]                              |column|Delivery Type|row|[1]|value|Stock                       |
+|check        |get grid |[1]                              |column|Critical     |row|[1]|value|$CR                         |
+|check        |get grid |[1]                              |column|Cust. Ship   |row|[1]|value|false                       |
+|check        |get grid |[1]                              |column|RPM          |row|[1]|value|false                       |
+
+!*** Approve the request
+
+!|script                |
+|click on button|ACCEPT |
+|Click on button|APPROVE|
+
+
+
+!*** Log out and tear down
+
+!|script|
+|logout |
+
+*!
+
+!*** Login as Finance Admin
+!|script                      |
+|login with username|Kavya@123|
+
+!*** Click on the tab
+
+!|script           |
+|click on menu|Task|
+
+*!
+!*** Validation of record contents
+!|script                                                                                                |
+|click on grid|[1]      |column                           |Task  |row          |[1]                     |
+|check        |get field|Dummy Reservation                |value |$DR                                   |
+|check        |get field|Product Group                    |value |$PG                                   |
+|wait for     |5        |seconds                                                                        |
+|check        |get field|IO                               |value |$IO                                   |
+|wait for     |5        |seconds                                                                        |
+|check        |get field|CC                               |value |$CC                                   |
+|wait for     |5        |seconds                                                                        |
+|check        |get field|Plant Group                      |value |$PlG                                  |
+|wait for     |5        |seconds                                                                        |
+|check        |get field|GL Account                       |value |$GL                                   |
+|wait for     |5        |seconds                                                                        |
+|check        |get field|Short Order Description          |value |qweert                                |
+|check        |get field|Description[1]                   |value |$D1                                   |
+|check        |get field|Description[2]                   |value |$D2                                   |
+|check        |get field|Sydney Project                   |value |$SP                                   |
+|check        |get field|Quick turn quartz/silicon/SiC ERF|value |$Q                                    |
+|check        |get field|Tool Down                        |value |$TD                                   |
+|check        |get field|Deliver To                       |value |$DT                                   |
+|check        |get field|Building                         |value |$B                                    |
+|check        |get field|Cube/Office/Lab Location         |value |$C                                    |
+|check        |get grid |[1]                              |column|LI           |row|[1]|value|$LI       |
+|check        |get grid |[1]                              |column|Part Number  |row|[1]|value|$PN       |
+|check        |get grid |[1]                              |column|Description  |row|[1]|value|$D3       |
+|check        |get grid |[1]                              |column|Commodity    |row|[1]|value|$CM       |
+|check        |get grid |[1]                              |column|Std Cost     |row|[1]|value|$SC       |
+|check        |get grid |[1]                              |column|Qty          |row|[1]|value|2         |
+|check        |get grid |[1]                              |column|Need Date    |row|[1]|value|05/05/2023|
+|check        |get grid |[1]                              |column|Addtl. Fee   |row|[1]|value|$AF       |
+|check        |get grid |[1]                              |column|Total Cost   |row|[1]|value|$TC       |
+|check        |get grid |[1]                              |column|Delivery Type|row|[1]|value|Stock     |
+|check        |get grid |[1]                              |column|Critical     |row|[1]|value|$CR       |
+|check        |get grid |[1]                              |column|Cust. Ship   |row|[1]|value|[]        |
+|check        |get grid |[1]                              |column|RPM          |row|[1]|value|[]        |
+
+
+
+!*** Log out and tear down
+
+!|script  |
+|logout   |
+|tear down|
+*!

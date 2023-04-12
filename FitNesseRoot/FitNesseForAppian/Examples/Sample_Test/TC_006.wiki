@@ -1,0 +1,50 @@
+---
+Test
+---
+\!***> FitNesse Configurations
+
+!define TEST_SYSTEM {slim}
+!define COMMAND_PATTERN {java -Dlog4j.configuration=file:///${automated.testing.home}/log4j.properties -cp %p %m}
+!path ${automated.testing.home}/**.jar
+*!
+----
+!3 '''Please follow the directions below to execute the test'''
+
+
+----
+!*** Initialization and Login to Tempo
+
+!| script|com.appiancorp.ps.automatedtest.fixture.TempoFixture|
+|setup for test script for browser                            |
+
+*!
+---
+
+!** Navigate to records tab
+
+!|script             |
+|click on menu|record|
+*!
+
+!* User filters
+
+!|script                                                 |
+|verify text                     |high    |is present    |
+|verify text                     |low     |is present    |
+|verify text                     |medium  |is present    |
+|wait for                        |10      |seconds       |
+|populate record type user filter|Priority|with  |low    |
+|wait for                        |5       |seconds       |
+|verify text                     |high    |is not present|
+|verify text                     |medium  |is not present|
+|populate record type user filter|Priority|with  |medium |
+|verify text                     |high    |is not present|
+|wait for                        |10      |seconds       |
+|clear record type user filter   |Priority               |
+|wait for                        |10      |seconds       |
+*!
+
+!* logout and tear down
+!|script  |
+|logout   |
+|tear down|

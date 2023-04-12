@@ -1,0 +1,107 @@
+---
+Help: Validation of dataflow
+Test
+---
+!***> FitNesse Configurations
+
+!define TEST_SYSTEM {slim}
+!define COMMAND_PATTERN {java -Dlog4j.configuration=file:///${automated.testing.home}/log4j.properties -cp %p %m}
+!path ${automated.testing.home}/**.jar
+*!
+----
+
+!*** Login using valid credentials
+
+!| script             |com.appiancorp.ps.automatedtest.fixture.TempoFixture        |
+|setup with           |CHROME                       |browser                       |
+|set appian url to    |https://appiancoe.vuram.com/suite/sites/case-management-site|
+|set appian version to|22.4                                                        |
+|set appian locale to |en_US                                                       |
+|login with username  |Akash@123                                                   |
+
+*!
+!*** Click on the Record
+
+!|script                                                       |
+|click on menu|RECORD                                          |
+|$a=          |get grid|[1]|column|Request Number|row|[1]|value|
+|wait for     |5       |seconds                                |
+|click on link|$a                                              |
+
+!*** Field validation
+
+!|script                                     |
+|$a1=    |get field|Client Number      |value|
+|$a=     |get field|Client Name        |value|
+|wait for|5        |seconds                  |
+|$b=     |get field|Person Type        |value|
+|wait for|5        |seconds                  |
+|$c=     |get field|Juridical Form     |value|
+|wait for|5        |seconds                  |
+|$d=     |get field|Priority           |value|
+|wait for|5        |seconds                  |
+|$e=     |get field|Assigned To        |value|
+|$f=     |get field|Subject            |value|
+|$g=     |get field|Status             |value|
+|$h=     |get field|Date Registered    |value|
+|$i=     |get field|Request Type       |value|
+|$j=     |get field|SLA                |value|
+|$k=     |get field|Accepted By        |value|
+|$l=     |get field|Reference Case/Task|value|
+|$m=     |get field|Description        |value|
+
+*!
+
+!*** Logout 
+!|script|
+|logout |
+*!
+
+!*** Login as Manager
+!|script                       |
+|login with username|Anjali@123|
+*!
+
+!*** Validation of record contents
+#!|script                                                                                         |
+|click on menu|Task                                                                              |
+|click on grid|[1]      |column                           |Task  |row          |[7]              |
+|check        |get field|Dummy Reservation                |value |$a1                            |
+|check        |get field|Product Group                    |value |$a                             |
+|wait for     |5        |seconds                                                                 |
+|check        |get field|IO                               |value |$b                             |
+|wait for     |5        |seconds                                                                 |
+|check        |get field|CC                               |value |$c                             |
+|wait for     |5        |seconds                                                                 |
+|check        |get field|Plant Group                      |value |$d                             |
+|wait for     |5        |seconds                                                                 |
+|check        |get field|GL Account                       |value |$e                             |
+|wait for     |5        |seconds                                                                 |
+|check        |get field|Short Order Description          |value |$f                             |
+|check        |get field|Description[1]                   |value |$g                             |
+|check        |get field|Description[2]                   |value |$h                             |
+|check        |get field|Sydney Project                   |value |$i                             |
+|check        |get field|Quick turn quartz/silicon/SiC ERF|value |$j                             |
+|check        |get field|Tool Down                        |value |$k                             |
+|check        |get field|Deliver To                       |value |$l                             |
+|check        |get field|Building                         |value |$m                             |
+|check        |get field|Cube/Office/Lab Location         |value |$n                             |
+|check        |get grid |[1]                              |column|LI           |row|[1]|value|$o |
+|check        |get grid |[1]                              |column|Part Number  |row|[1]|value|$p |
+|check        |get grid |[1]                              |column|Description  |row|[1]|value|$q |
+|check        |get grid |[1]                              |column|Commodity    |row|[1]|value|$r |
+|check        |get grid |[1]                              |column|Std Cost     |row|[1]|value|$s |
+|check        |get grid |[1]                              |column|Qty          |row|[1]|value|$t |
+|check        |get grid |[1]                              |column|Need Date    |row|[1]|value|$u |
+|check        |get grid |[1]                              |column|Addtl. Fee   |row|[1]|value|$v |
+|check        |get grid |[1]                              |column|Total Cost   |row|[1]|value|$w |
+|check        |get grid |[1]                              |column|Delivery Type|row|[1]|value|$x |
+|check        |get grid |[1]                              |column|Critical     |row|[1]|value|$y |
+|check        |get grid |[1]                              |column|Cust. Ship   |row|[1]|value|$z |
+|check        |get grid |[1]                              |column|RPM          |row|[1]|value|$a1|
+
+*!
+!*** Logout
+!|script  |
+|logout   |
+|tear down|

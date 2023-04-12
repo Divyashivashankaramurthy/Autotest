@@ -1,0 +1,37 @@
+---
+Help: verify whether the application is in site view
+Test
+---
+!***> FitNesse Configurations
+
+!define TEST_SYSTEM {slim}
+!define COMMAND_PATTERN {java -Dlog4j.configuration=file:///${automated.testing.home}/log4j.properties -cp %p %m}
+!path ${automated.testing.home}/**.jar
+*!
+----
+!3 '''Please follow the directions below to execute the test'''
+
+
+----
+!*** Login using valid credentials
+
+!** Senario
+!|script                                        |com.appiancorp.ps.automatedtest.fixture.TempoFixture|
+|setup for test script for browser with Username|Akash@123                                           |
+*!
+
+*!
+!*** Click on the tab
+
+!|script                        |
+|click on menu|Virtual Warehouse|
+
+
+
+*!
+!*** Log out and tear down
+
+!| script                 |
+|logout                   |
+|set timeout seconds to|10|
+*!

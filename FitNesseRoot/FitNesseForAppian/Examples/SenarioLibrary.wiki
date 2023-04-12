@@ -1,0 +1,7 @@
+!*** Setup customizable for browser, locale, version, and URL
+!|scenario            |setup Browser|browserType|locale|location|version|versionNum|url|appianUrl|
+|setup with           |@browserType |browser                                                     |
+|set appian locale to |@location                                                                 |
+|set appian version to|@versionNum                                                               |
+|set appian url to    |@appianUrl                                                                |
+*!
