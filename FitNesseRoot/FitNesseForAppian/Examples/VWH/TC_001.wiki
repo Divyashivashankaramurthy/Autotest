@@ -75,7 +75,7 @@ Test
 |click on grid|[1]      |column                           |Task  |row          |[7]              |
 |check        |get field|Dummy Reservation                |value |$a1                            |
 |check        |get field|Product Group                    |value |$a                             |
-|wait for     |5        |seconds                                                                 |
+|wait for     |8        |seconds                                                                 |
 |check        |get field|IO                               |value |$b                             |
 |wait for     |5        |seconds                                                                 |
 |check        |get field|CC                               |value |$c                             |
