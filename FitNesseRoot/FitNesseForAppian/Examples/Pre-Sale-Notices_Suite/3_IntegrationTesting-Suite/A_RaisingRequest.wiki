@@ -1,0 +1,35 @@
+---
+Help: To initiate the request
+Test
+---
+!*** FitNesse Configurations
+
+!define TEST_SYSTEM {slim}
+!define COMMAND_PATTERN {java -Dlog4j.configuration=file:///${automated.testing.home}/log4j.properties -cp %p %m}
+!path ${automated.testing.home}/**.jar
+
+*!
+
+!*** Initialization and Login
+!|script|com.appiancorp.ps.automatedtest.fixture.TempoFixture|
+|Browser setup and navigate to url                           |
+*!
+
+!*** Login
+!|script                        |
+|login with username|Arpitha@123|
+*!
+
+!*** Click on menu
+!|script                                               |
+|click on menu                 |PRE-SALE NOTICE        |
+|wait for                      |5       |seconds       |
+|click on record related action|PREPARE PRE-SALE NOTICE|
+|wait for                      |7       |seconds       |
+*!
+
+!*** fill the request form
+!|script        |
+|Raise a Request|
+|logout         |
+***!

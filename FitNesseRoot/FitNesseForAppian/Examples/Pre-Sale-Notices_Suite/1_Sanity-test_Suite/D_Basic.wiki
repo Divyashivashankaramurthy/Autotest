@@ -1,0 +1,43 @@
+---
+Help: To check the tabs
+Test
+---
+!*** FitNesse Configurations
+
+!define TEST_SYSTEM {slim}
+!define COMMAND_PATTERN {java -Dlog4j.configuration=file:///${automated.testing.home}/log4j.properties -cp %p %m}
+!path ${automated.testing.home}/**.jar
+
+*!
+
+!*** Initialization and Login
+!|script|com.appiancorp.ps.automatedtest.fixture.TempoFixture|
+|Browser setup and navigate to url                           |
+*!
+
+!*** Login
+!|script                       |
+|login with username|Anjali@123|
+|wait for           |5 |seconds|
+*!
+
+!*** Check whether the Userfilters are present in task grid
+!|script                                                   |
+|click on menu                 |PRE-SALE NOTICE            |
+|verify record type user filter|WORKFLOW SUBTYPE|is present|
+|verify record type user filter|STATUS          |is present|
+|verify record type user filter|LAST UPDATED ON |is present|
+*!
+
+!*** navigate to REPORT tab and check the presence of specified Charts
+!|script                                  |
+|click on menu|REPORT                     |
+|wait for     |5               |seconds   |
+|verify chart |WorkFlow Subtype|is present|
+|verify chart |Status          |is present|
+|tear down                                |
+*!
+
+
+
+

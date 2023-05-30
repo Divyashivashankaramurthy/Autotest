@@ -1,0 +1,86 @@
+---
+Help: Validation of User filters
+Test
+---
+!*** FitNesse Configurations
+
+!define TEST_SYSTEM {slim}
+!define COMMAND_PATTERN {java -Dlog4j.configuration=file:///${automated.testing.home}/log4j.properties -cp %p %m}
+!path ${automated.testing.home}/**.jar
+
+*!
+
+!*** Initialization and Login
+!|script|com.appiancorp.ps.automatedtest.fixture.TempoFixture|
+|Browser setup and navigate to url                           |
+*!
+
+!*** Login as RE Specialist  and navigate to records
+!|script                            |
+|login with username|Akash@123      |
+|wait for progress bar              |
+|wait for           |5   |seconds   |
+|click on menu      |PRE-SALE NOTICE|
+*!
+
+
+
+!*** Validation of User filters
+!|script                             |
+|Validate WorkflowSubType User filter|
+|Validate Status filter              |
+
+*!
+!|script|
+|logout |
+*!
+
+!*** Login as Compliance Manager and navigate to records
+!|script                            |
+|login with username|Anjali@123     |
+|wait for           |5   |seconds   |
+|click on menu      |PRE-SALE NOTICE|
+*!
+
+!*** Validation of User filters
+!|script                             |
+|Validate WorkflowSubType User filter|
+|Validate Status filter              |
+|logout                              |
+*!
+
+!*** Login as RE Directer and navigate to records tab
+!|script                            |
+|login with username|Kavya@123      |
+|wait for           |5   |seconds   |
+|click on menu      |PRE-SALE NOTICE|
+
+*!
+
+!*** Validate User filters
+!|script                             |
+|Validate WorkflowSubType User filter|
+|Validate Status filter              |
+|logout                              |
+*!
+!*** Login as Third Party and navigate to records tab
+!|script                            |
+|login with username|Vidya@123      |
+|wait for           |5   |seconds   |
+|click on menu      |PRE-SALE NOTICE|
+
+*!
+
+!*** Validate User filters
+!|script                             |
+|Validate WorkflowSubType User filter|
+|Validate Status filter              |
+|logout                              |
+|tear down                           |
+*!
+
+
+
+
+
+

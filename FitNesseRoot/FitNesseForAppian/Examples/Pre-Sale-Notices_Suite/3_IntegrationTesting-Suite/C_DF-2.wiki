@@ -1,0 +1,37 @@
+---
+Help: Data flow between requester and REO Director
+Test
+---
+!*** FitNesse Configurations
+
+!define TEST_SYSTEM {slim}
+!define COMMAND_PATTERN {java -Dlog4j.configuration=file:///${automated.testing.home}/log4j.properties -cp %p %m}
+!path ${automated.testing.home}/**.jar
+
+*!
+
+!*** Initialization and Login
+!|script|com.appiancorp.ps.automatedtest.fixture.TempoFixture|
+|Browser setup and navigate to url                           |
+*!
+
+!*** Login as Compliance Manager
+!|script                      |
+|login with username|Kavya@123|
+*!
+!*** 
+!|script                                                               |
+|click on menu                 |PRE-SALE NOTICE                        |
+|wait for                      |5        |seconds                      |
+|click on record related action|$R                                     |
+|check                         |get field|Request Number  |value|$R    |
+|check                         |get field|Work Unit       |value|$WU   |
+|check                         |get field|Workflow Type   |value|$WFT  |
+|check                         |get field|Workflow Subtype|value|$WST  |
+|check                         |get field|Priority        |value|$P    |
+|check                         |get field|Description     |value|$DES  |
+|check                         |get field|Property Name   |value|$PN   |
+|check                         |get field|Property State  |value|$PS   |
+|check                         |get field|Property City   |value|$PC   |
+|check                         |get field|LPAMS Deal Name |value|$LPAMS|
+*!

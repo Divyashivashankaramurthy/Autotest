@@ -1,0 +1,5 @@
+---
+Help: To test the critical features of the application
+---
+!1 Test suite ${PAGE_NAME}
+!contents -R2 -g -p -f -h

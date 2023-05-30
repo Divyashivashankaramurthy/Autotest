@@ -5,11 +5,7 @@ Suite
 
 !note This page is automatically generated when running tests. It will be overwritten by the next Suite or Test execution.
 
-Tests failed (first failure was at 2023-04-11T14:43:32.503):
+Tests failed (first failure was at 2023-04-14T15:34:09.448):
 
 !see [[FitNesseForAppian.V_W_H.TC_001][.FitNesseForAppian.V_W_H.TC_001]]
 !see [[FitNesseForAppian.V_W_H.TC_002][.FitNesseForAppian.V_W_H.TC_002]]
-!see [[FitNesseForAppian.V_W_H.TC_005][.FitNesseForAppian.V_W_H.TC_005]]
-!see [[FitNesseForAppian.V_W_H.TC_007][.FitNesseForAppian.V_W_H.TC_007]]
-!see [[FitNesseForAppian.V_W_H.TC_008][.FitNesseForAppian.V_W_H.TC_008]]
-!see [[FitNesseForAppian.V_W_H.TC_073][.FitNesseForAppian.V_W_H.TC_073]]

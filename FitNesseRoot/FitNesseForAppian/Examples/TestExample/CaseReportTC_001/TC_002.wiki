@@ -10,14 +10,14 @@ Test
 ----
 !3 '''Please follow the directions below to execute the test'''
 
-!|script                                                                                                        |
-|setup Browser|CHROME|locale|en_US|version|22.4|url|https://appiancoe.vuram.com/suite/sites/case-management-site|
+#!|script                                                                                                        |
+#|setup Browser|CHROME|locale|en_US|version|22.4|url|https://appiancoe.vuram.com/suite/sites/case-management-site|
 ----
 !*** Initialization and Login to Tempo
 
-#!| script             |com.appiancorp.ps.automatedtest.fixture.TempoFixture        |
+!| script             |com.appiancorp.ps.automatedtest.fixture.TempoFixture        |
 |setup with           |CHROME                       |browser                       |
-|set appian url to    |https://appiancoe.vuram.com/suite/sites/case-management-site|
+|open                 |https://appiancoe.vuram.com/suite/sites/case-management-site|
 |set appian version to|22.4                                                        |
 |set appian locale to |en_US                                                       |
 |login with username  |Akash@123                                                   |

@@ -1,0 +1,5 @@
+---
+Help: Major scenarios of Reports
+---
+!1 Test suite ${PAGE_NAME}
+!contents -R2 -g -p -f -h

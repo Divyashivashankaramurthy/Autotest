@@ -1,0 +1,57 @@
+---
+Help: Validation of Search box
+Test
+---
+!*** FitNesse Configurations
+
+!define TEST_SYSTEM {slim}
+!define COMMAND_PATTERN {java -Dlog4j.configuration=file:///${automated.testing.home}/log4j.properties -cp %p %m}
+!path ${automated.testing.home}/**.jar
+
+*!
+
+!*** Initialization and Login
+!|script|com.appiancorp.ps.automatedtest.fixture.TempoFixture|
+|Browser setup and navigate to url                           |
+*!
+
+!*** Login as Compliance Manager and navigate to records
+!|script                            |
+|login with username|Anjali@123     |
+|wait for           |5   |seconds   |
+|click on menu      |PRE-SALE NOTICE|
+*!
+
+!*** Validate Search Box
+!|script                |
+|Validate the Search box|
+|logout                 |
+*!
+
+!*** Login as REO Director and navigate to records
+!|script                            |
+|login with username|Kavya@123      |
+|wait for           |5   |seconds   |
+|click on menu      |PRE-SALE NOTICE|
+*!
+
+!*** Validate Search Box
+!|script                |
+|Validate the Search box|
+|logout                 |
+*!
+
+!*** Login as Third Party and navigate to records
+!|script                            |
+|login with username|Vidya@123      |
+|wait for           |5   |seconds   |
+|click on menu      |PRE-SALE NOTICE|
+*!
+
+!*** Validate Search Box
+!|script                |
+|Validate the Search box|
+|logout                 |
+*!
+
+

@@ -1,0 +1,49 @@
+---
+Help: Validation of Status Chart
+Test
+---
+!*** FitNesse Configurations
+
+!define TEST_SYSTEM {slim}
+!define COMMAND_PATTERN {java -Dlog4j.configuration=file:///${automated.testing.home}/log4j.properties -cp %p %m}
+!path ${automated.testing.home}/**.jar
+
+*!
+
+!*** Initialization, Login and navigate to REPORT tab
+!|script            |com.appiancorp.ps.automatedtest.fixture.TempoFixture|
+|Browser setup and navigate to url                                       |
+|login with username|Anjali@123                                          |
+|wait for           |5                      |seconds                     |
+|click on menu      |REPORT                                              |
+*!
+
+!*** Validate WorkFlowSubtype Chart
+!|script                       |
+|verify chart|Status|is present|
+|Validate Status Chart         |
+*!
+
+!*** Logout
+!|script|
+|logout |
+*!
+
+!*** Login as REO Director
+!|script                      |
+|login with username|Kavya@123|
+|wait for           |5|seconds|
+|click on menu      |REPORT   |
+*!
+
+!*** Validate WorkFlowSubtype Chart
+!|script                       |
+|verify chart|Status|is present|
+|Validate Status Chart         |
+*!
+
+!*** Logout
+!|script  |
+|logout   |
+|tear down|
+*!

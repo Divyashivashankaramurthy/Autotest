@@ -18,10 +18,10 @@ Test
 
 !| script             |com.appiancorp.ps.automatedtest.fixture.TempoFixture        |
 |setup with           |CHROME                       |browser                       |
-|set appian url to    |https://appiancoe.vuram.com/suite/sites/case-management-site|
+|open                 |https://appiancoe.vuram.com/suite/sites/case-management-site|
 |set appian version to|22.4                                                        |
 |set appian locale to |en_US                                                       |
-|login with username  |Akash@123                                                   |
+|login with username  |Anjali@123                                                  |
 *!
 ---
 

@@ -1,0 +1,63 @@
+---
+Help: To check whether the Compliance manager SendBack the Request
+Test
+---
+!*** FitNesse Configurations
+
+!define TEST_SYSTEM {slim}
+!define COMMAND_PATTERN {java -Dlog4j.configuration=file:///${automated.testing.home}/log4j.properties -cp %p %m}
+!path ${automated.testing.home}/**.jar
+*!
+
+!*** Initialization and Login
+
+!|script|com.appiancorp.ps.automatedtest.fixture.TempoFixture|
+|Browser setup and navigate to url                           |
+
+*!
+
+!*** Login as RE Specialist
+!|script                      |
+|login with username|Akash@123|
+*!
+
+!*** Raise a Request
+!|script                                               |
+|click on menu                 |PRE-SALE NOTICE        |
+|wait for                      |5       |seconds       |
+|click on record related action|PREPARE PRE-SALE NOTICE|
+|wait for                      |7       |seconds       |
+|Raise a Request                                       |
+*!
+
+
+!*** Logout
+!|script|
+|logout |
+*!
+
+!*** Login as Compliance Manager
+!|script                       |
+|login with username|Anjali@123|
+*!
+
+!*** Sendback the request
+!|script                            |
+|click on menu|Home Page            |
+|wait for     |5      |seconds      |
+|click on link|click here to refresh|
+|wait for     |5      |seconds      |
+|Send back the Request              |
+
+!*** Logout
+!|script|
+|logout |
+*!
+
+!*** Login as RE Specialist
+!|script                      |
+|login with username|Akash@123|
+|wait for           |5|seconds|
+|Resubmit Request             |
+|logout                       |
+*!

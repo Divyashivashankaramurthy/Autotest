@@ -1,0 +1,31 @@
+---
+Test
+---
+!*** FitNesse Configurations
+
+!define TEST_SYSTEM {slim}
+!define COMMAND_PATTERN {java -Dlog4j.configuration=file:///${automated.testing.home}/log4j.properties -cp %p %m}
+!path ${automated.testing.home}/**.jar
+
+*!
+
+!*** Initialization and Login to Tempo
+
+!| script             |com.appiancorp.ps.automatedtest.fixture.TempoFixture    |
+|setup with           |CHROME                     |browser                     |
+|set appian url to    |https://appiancoe.vuram.com/suite/sites/pre-sale-notices|
+|set appian version to|22.4                                                    |
+|set appian locale to |en_US                                                   |
+|login with username  |Akash@123                                               |
+
+*!
+
+
+!*** Login as RE Specialist 1
+
+!|script                         |
+|click on menu|PRE-SALE NOTICE   |
+|wait for     |5       |seconds  |
+|$R=          |get link|PS[1]|url|
+
+*!

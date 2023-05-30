@@ -10,9 +10,10 @@ Test
 *!
 ----
 !** Senario
-!|script|com.appiancorp.ps.automatedtest.fixture.TempoFixture|
+#!|script|com.appiancorp.ps.automatedtest.fixture.TempoFixture|
 |setup for test script for browser                           |
 *!
+
 
 !*** Click on requests tab
 !|script                                                        |
