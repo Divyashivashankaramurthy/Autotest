@@ -19,6 +19,11 @@ Test
 !|script                                        |
 |click on menu         |Home Page               |
 |wait for              |5        |seconds       |
+|refresh                                        |
+|wait for progress bar                          |
+|wait for              |50       |seconds       |
+|refresh                                        |
+|wait for progress bar                          |
 |Approve the request in|Pre-Sale Notice Approval|
 |refresh                                        |
 |wait for progress bar                          |

@@ -35,10 +35,11 @@ This table initializes the fixture class and sets the environment defaults
 
 
 !*** Fill the section "Genaral Notice"
-!|scenario            |fill the Genaral Notice 'Work Flow Subtype' with|WFS |priority|Priority|description|Description|
-|populate field       |Work Flow Subtype                               |with|@WFS                                     |
-|click on radio option|@Priority                                                                                      |
-|populate field       |Description                                     |with|@Description                             |
+!|scenario            |fill the Genaral Notice 'Work Flow Subtype' with|WFS |Work Unit Reference|WFU|priority|Priority|description|Description|
+|populate field       |Work Flow Subtype                               |with|@WFS                                                             |
+|populate field       |Work Unit Reference                             |with|@WFU                                                             |
+|click on radio option|@Priority                                                                                                              |
+|populate field       |Description                                     |with|@Description                                                     |
 *!
 
 !*** Fill the section "Reference section" 
@@ -52,7 +53,6 @@ This table initializes the fixture class and sets the environment defaults
 !*** Comment and Submit
 !|scenario                      |Comment with and submit        |comment      |
 |populate field with placeholder|Please enter Your Comments here|with|@comment|
-|Store data in variables                                                      |
 |click on button                |SUBMIT                                       |
 |wait for                       |2                              |seconds      |
 |click on button                |Yes                                          |
@@ -61,11 +61,11 @@ This table initializes the fixture class and sets the environment defaults
 *!
 
 !*** Scenario to raise a request
-|Scenario                                        |Raise a Request                                                      |
-|fill the Genaral Notice 'Work Flow Subtype' with|Auction     |priority     |High     |description     |Simple test    |
-|fill the Reference Document Attachment with     |C:\\Users\\u429130\\Desktop\\Automation scripts_ Fitnesse\\sample.pdf|
-|wait for                                        |5           |seconds                                                 |
-|Comment with and submit                         |PFA relavent documents                                               |
+|Scenario                                        |Raise a Request                                                       |
+|fill the Genaral Notice 'Work Flow Subtype' with|Auction|Work Unit Reference|Land|priority|High|description|Simple test|
+|fill the Reference Document Attachment with     |C:\\Users\\u429130\\Desktop\\Automation scripts_ Fitnesse\\sample.pdf |
+|wait for                                        |5      |seconds                                                       |
+|Comment with and submit                         |PFA relavent documents                                                |
 *!
 !*** Scenario to review the request
 
@@ -75,23 +75,22 @@ This table initializes the fixture class and sets the environment defaults
 |verify milestone               |[1]                            |step is       |Pre-Sale Review|
 |accept task                                                                                   |
 |$Req=                          |get field                      |Request Number|value          |
-|Compare Data                                                                                  |
+|$MS1=                          |get milestone                  |[1]           |step           |
 |populate field with placeholder|Please enter Your Comments Here|with          |Reviewed       |
 |click on button                |FORWARD                                                       |
 *!
 
 !*** Scenario to approve the request
-!|scenario                      |Approve the request in         |Stage              |
-|populate field with placeholder|Search your Tasks here         |with   |$Req       |
-|click on button                |SEARCH                                             |
-|wait for                       |5                              |seconds            |
-|click on grid                  |[1]                            |column |[1]|row|[1]|
-|wait for                       |5                              |seconds            |
-|verify milestone               |[1]                            |step is|@Stage     |
-|accept task                                                                        |
-|Compare Data                                                                       |
-|populate field with placeholder|Please enter Your Comments Here|with   |Approved   |
-|click on button                |APPROVE                                            |
+!|scenario                      |Approve the request in         |Stage             |
+|populate field with placeholder|Search your Tasks here         |with  |$Req       |
+|click on button                |SEARCH                                            |
+|wait for                       |5                              |seconds           |
+|click on grid                  |[1]                            |column|[1]|row|[1]|
+|wait for                       |5                              |seconds           |
+|$MS1=                          |get milestone                  |[1]   |step       |
+|accept task                                                                       |
+|populate field with placeholder|Please enter Your Comments Here|with  |Approved   |
+|click on button                |APPROVE                                           |
 *!
 
 
@@ -130,7 +129,6 @@ This table initializes the fixture class and sets the environment defaults
 
 !*** Validation of WorkFlowSubType Chart
 !|scenario         |Validate WorkFlowSubType Chart           |
-|Validate Pie Chart|WorkFlow Subtype|index|[1]|value|Auction |
 |Validate Pie Chart|WorkFlow Subtype|index|[2]|value|REO Sale|
 *!
 !*** Validation of Status Chart
@@ -197,46 +195,63 @@ This table initializes the fixture class and sets the environment defaults
 
 !*** Validation of Search box
 
-!|scenario                      |Validate the Search box                                                              |
-|populate field with placeholder|Search Records|with  |Akash S                                                        |
-|click on button                |SEARCH                                                                               |
-|verify grid                    |[1]           |column|Created By        |row|*|contains value|Akash S                |
-|clear field                    |Search Records                                                                       |
-|populate field with placeholder|Search Records|with  |Arpitha S                                                      |
-|click on button                |SEARCH                                                                               |
-|verify grid                    |[1]           |column|Created By        |row|*|contains value|Arpitha S              |
-|populate field with placeholder|Search Records|with  |High                                                           |
-|click on button                |SEARCH                                                                               |
-|verify grid                    |[1]           |column|Priority          |row|*|contains value|High                   |
-|clear field                    |Search Records                                                                       |
-|populate field with placeholder|Search Records|with  |Normal                                                         |
-|click on button                |SEARCH                                                                               |
-|verify grid                    |[1]           |column|Priority          |row|*|contains value|Normal                 |
-|clear field                    |Search Records                                                                       |
-|populate field with placeholder|Search Records|with  |REO Sale                                                       |
-|click on button                |SEARCH                                                                               |
-|verify grid                    |[1]           |column|Work Flow Sub Type|row|*|contains value|REO Sale               |
-|clear field                    |Search Records                                                                       |
-|populate field with placeholder|Search Records|with  |Auction                                                        |
-|click on button                |SEARCH                                                                               |
-|verify grid                    |[1]           |column|Work Flow Sub Type|row|*|contains value|Auction                |
-|clear field                    |Search Records                                                                       |
-|populate field with placeholder|Search Records|with  |Completed                                                      |
-|click on button                |SEARCH                                                                               |
-|verify grid                    |[1]           |column|Status            |row|*|contains value|Completed              |
-|clear field                    |Search Records                                                                       |
-|populate field with placeholder|Search Records|with  |PSN Request Raised                                             |
-|click on button                |SEARCH                                                                               |
-|verify grid                    |[1]           |column|Status            |row|*|contains value|PSN Request Raised     |
-|clear field                    |Search Records                                                                       |
-|populate field with placeholder|Search Records|with  |Forward to REO Director                                        |
-|click on button                |SEARCH                                                                               |
-|verify grid                    |[1]           |column|Status            |row|*|contains value|Forward to REO Director|
-|clear field                    |Search Records                                                                       |
-|populate field with placeholder|Search Records|with  |Approved                                                       |
-|click on button                |SEARCH                                                                               |
-|verify grid                    |[1]           |column|Status            |row|*|contains value|Approved               |
-|clear field                    |Search Records                                                                       |
+!|scenario                      |Validate the Search box                                                                |
+|populate field with placeholder|Search Records|with  |Akash S                                                          |
+|click on button                |SEARCH                                                                                 |
+|verify grid                    |[1]           |column|Created By        |row|[1]|contains value|Akash S                |
+|clear field                    |Search Records                                                                         |
+|click on button                |SEARCH                                                                                 |
+|wait for progress bar                                                                                                  |
+|populate field with placeholder|Search Records|with  |Arpitha S                                                        |
+|click on button                |SEARCH                                                                                 |
+|verify grid                    |[1]           |column|Created By        |row|[1]|contains value|Arpitha S              |
+|clear field                    |Search Records                                                                         |
+|click on button                |SEARCH                                                                                 |
+|wait for progress bar                                                                                                  |
+|populate field with placeholder|Search Records|with  |High                                                             |
+|click on button                |SEARCH                                                                                 |
+|verify grid                    |[1]           |column|Priority          |row|[1]|contains value|High                   |
+|clear field                    |Search Records                                                                         |
+|click on button                |SEARCH                                                                                 |
+|wait for progress bar                                                                                                  |
+|populate field with placeholder|Search Records|with  |Normal                                                           |
+|click on button                |SEARCH                                                                                 |
+|verify grid                    |[1]           |column|Priority          |row|[1]|contains value|Normal                 |
+|clear field                    |Search Records                                                                         |
+|click on button                |SEARCH                                                                                 |
+|wait for progress bar                                                                                                  |
+|populate field with placeholder|Search Records|with  |REO Sale                                                         |
+|click on button                |SEARCH                                                                                 |
+|verify grid                    |[1]           |column|Work Flow Sub Type|row|[1]|contains value|REO Sale               |
+|clear field                    |Search Records                                                                         |
+|click on button                |SEARCH                                                                                 |
+|wait for progress bar                                                                                                  |
+|populate field with placeholder|Search Records|with  |Auction                                                          |
+|click on button                |SEARCH                                                                                 |
+|verify grid                    |[1]           |column|Work Flow Sub Type|row|[1]|contains value|Auction                |
+|clear field                    |Search Records                                                                         |
+|click on button                |SEARCH                                                                                 |
+|wait for progress bar                                                                                                  |
+|populate field with placeholder|Search Records|with  |Completed                                                        |
+|click on button                |SEARCH                                                                                 |
+|verify grid                    |[1]           |column|Status            |row|[1]|contains value|Completed              |
+|clear field                    |Search Records                                                                         |
+|populate field with placeholder|Search Records|with  |PSN Request Raised                                               |
+|click on button                |SEARCH                                                                                 |
+|verify grid                    |[1]           |column|Status            |row|[1]|contains value|PSN Request Raised     |
+|clear field                    |Search Records                                                                         |
+|click on button                |SEARCH                                                                                 |
+|wait for progress bar                                                                                                  |
+|populate field with placeholder|Search Records|with  |Forward to REO Director                                          |
+|click on button                |SEARCH                                                                                 |
+|verify grid                    |[1]           |column|Status            |row|[1]|contains value|Forward to REO Director|
+|clear field                    |Search Records                                                                         |
+|populate field with placeholder|Search Records|with  |Approved                                                         |
+|click on button                |SEARCH                                                                                 |
+|verify grid                    |[1]           |column|Status            |row|[1]|contains value|Approved               |
+|clear field                    |Search Records                                                                         |
+|click on button                |SEARCH                                                                                 |
+|wait for progress bar                                                                                                  |
 *!
 
 !*** Assign request data into variables

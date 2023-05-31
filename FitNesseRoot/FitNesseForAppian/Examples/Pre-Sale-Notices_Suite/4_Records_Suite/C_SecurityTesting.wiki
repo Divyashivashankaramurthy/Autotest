@@ -24,10 +24,11 @@ Test
 !*** Validate record list view
 !|script                                                        |
 |$R=                            |get grid      |[1] |row count  |
-|populate field with placeholder|Search Records|with|Akash@123  |
 |wait for                       |5             |seconds         |
-|populate field with placeholder|Search Records|with|Arpitha S  |
-|check not                      |get grid      |[1] |row count|0|
+|populate field with placeholder|Search Records|with|Arpitha    |
+|click on button                |SEARCH                         |
+|wait for                       |5             |seconds         |
+|check                          |get grid      |[1] |row count|0|
 |logout                                                         |
 *!
 

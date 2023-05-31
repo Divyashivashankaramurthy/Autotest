@@ -9,16 +9,24 @@ Test
 !path ${automated.testing.home}/**.jar
 *!
 
+!*** Initialization and Login
+!|script|com.appiancorp.ps.automatedtest.fixture.TempoFixture|
+|Browser setup and navigate to url                           |
+*!
+
 !*** Login
 !|script                       |
 |login with username|Anjali@123|
 *!
 
 !*** Review the request
-!|script                |
-|click on menu|Home Page|
-|wait for     |5|seconds|
-|Review the Request     |
+!|script                 |
+|click on menu|Home Page |
+|wait for     |5 |seconds|
+|Review the Request      |
+|refresh                 |
+|wait for progress bar   |
+|wait for     |50|seconds|
 
 !*** Logout
 !|script|
