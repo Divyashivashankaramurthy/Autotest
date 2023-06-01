@@ -52,6 +52,7 @@ Test
 !|script                |
 |Validate the Search box|
 |logout                 |
+|tear down              |
 *!
 
 

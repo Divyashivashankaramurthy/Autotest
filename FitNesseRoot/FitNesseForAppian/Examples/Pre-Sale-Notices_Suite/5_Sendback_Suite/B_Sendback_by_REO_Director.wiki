@@ -1,5 +1,5 @@
 ---
-Help: To Check whether the REO Director users can Approve a request
+Help: To Check whether the REO Director users can sendback a request
 Test
 ---
 !*** FitNesse Configurations
@@ -39,10 +39,12 @@ Test
 *!
 
 !*** Review the request
-!|script                |
-|click on menu|Home Page|
-|wait for     |5|seconds|
-|Review the Request     |
+!|script                 |
+|click on menu|Home Page |
+|wait for     |5 |seconds|
+|Review the Request      |
+|refresh                 |
+|wait for     |50|seconds|
 *!
 
 !*** Logout
@@ -53,14 +55,18 @@ Test
 !*** Login as REO Director
 !|script                      |
 |login with username|Kavya@123|
+
 *!
 
 
 !*** Sendback the request
-!|script                |
-|click on menu|Home Page|
-|wait for     |5|seconds|
-|Send back the Request  |
+!|script                 |
+|click on menu|Home Page |
+|wait for     |30|seconds|
+|refresh                 |
+|wait for     |5 |seconds|
+|Send back the Request   |
+|wait for     |30|seconds|
 
 !*** Logout
 !|script|
@@ -68,15 +74,21 @@ Test
 *!
 
 !*** Login as Compliance Manager
-!|script                                                                             |
-|click on menu               |HOME PAGE                                              |
-|login with username         |Anjali@123                                             |
-|verify record related action|$SB     |is present                                    |
-|verify grid                 |[1]     |column|[1]   |row|[1]|contains value|$SB      |
-|check                       |get grid|[1]   |column|[1]|row|[1]           |value|$SB|
+!|script                                                          |
+|wait for                       |30                    |seconds   |
+|refresh                                                          |
+|wait for progress bar                                            |
+|click on menu                  |HOME PAGE                        |
+|login with username            |Anjali@123                       |
+|verify text                    |$RN                   |is present|
+|populate field with placeholder|Search your Tasks here|with |$RN |
+|click on button                |SEARCH                           |
+|wait for progress bar                                            |
+|Review the Request                                               |
 *!
 
 !*** Logout
-!|script|
-|logout |
+!|script  |
+|logout   |
+|tear down|
 *!

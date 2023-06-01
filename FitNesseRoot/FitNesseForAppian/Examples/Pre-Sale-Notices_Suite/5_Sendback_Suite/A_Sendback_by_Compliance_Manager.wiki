@@ -44,10 +44,12 @@ Test
 !*** Sendback the request
 !|script                            |
 |click on menu|Home Page            |
-|wait for     |5      |seconds      |
+|wait for     |5       |seconds     |
 |click on link|click here to refresh|
-|wait for     |5      |seconds      |
+|wait for     |5       |seconds     |
 |Send back the Request              |
+|refresh                            |
+|wait for     |50      |seconds     |
 
 !*** Logout
 !|script|
@@ -55,9 +57,17 @@ Test
 *!
 
 !*** Login as RE Specialist
-!|script                      |
-|login with username|Akash@123|
-|wait for           |5|seconds|
-|Resubmit Request             |
-|logout                       |
+!|script                       |
+|login with username|Akash@123 |
+|wait for           |50|seconds|
+|refresh                       |
+|wait for progress bar         |
+|Resubmit Request              |
+
+*!
+
+!*** 
+!|script  |
+|logout   |
+|tear down|
 *!

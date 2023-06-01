@@ -30,5 +30,6 @@ Test
 |wait for                       |5             |seconds         |
 |check                          |get grid      |[1] |row count|0|
 |logout                                                         |
+|tear down                                                      |
 *!
 

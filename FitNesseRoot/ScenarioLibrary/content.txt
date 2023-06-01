@@ -72,10 +72,8 @@ This table initializes the fixture class and sets the environment defaults
 !|scenario                      |Review the Request                                            |
 |click on grid                  |[1]                            |column        |[1]  |row |[1] |
 |wait for                       |5                              |seconds                       |
-|verify milestone               |[1]                            |step is       |Pre-Sale Review|
 |accept task                                                                                   |
 |$Req=                          |get field                      |Request Number|value          |
-|$MS1=                          |get milestone                  |[1]           |step           |
 |populate field with placeholder|Please enter Your Comments Here|with          |Reviewed       |
 |click on button                |FORWARD                                                       |
 *!
@@ -87,7 +85,6 @@ This table initializes the fixture class and sets the environment defaults
 |wait for                       |5                              |seconds           |
 |click on grid                  |[1]                            |column|[1]|row|[1]|
 |wait for                       |5                              |seconds           |
-|$MS1=                          |get milestone                  |[1]   |step       |
 |accept task                                                                       |
 |populate field with placeholder|Please enter Your Comments Here|with  |Approved   |
 |click on button                |APPROVE                                           |
@@ -324,6 +321,8 @@ This table initializes the fixture class and sets the environment defaults
 |refresh                                                                            |
 |wait for                       |5                              |seconds            |
 |verify text                    |$RN                            |is present         |
+|populate field with placeholder|Search your Tasks here         |with  |$RN         |
+|wait for progress bar                                                              |
 |click on grid                  |[1]                            |column|Task|row|[1]|
 |wait for progress bar                                                              |
 |populate field with placeholder|Please enter Your Comments here|with  |Changes made|

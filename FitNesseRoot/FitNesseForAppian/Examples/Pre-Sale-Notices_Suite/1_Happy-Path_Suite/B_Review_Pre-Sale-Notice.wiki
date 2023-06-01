@@ -9,10 +9,6 @@ Test
 !path ${automated.testing.home}/**.jar
 *!
 
-!*** Initialization and Login
-!|script|com.appiancorp.ps.automatedtest.fixture.TempoFixture|
-|Browser setup and navigate to url                           |
-*!
 
 !*** Login
 !|script                       |
