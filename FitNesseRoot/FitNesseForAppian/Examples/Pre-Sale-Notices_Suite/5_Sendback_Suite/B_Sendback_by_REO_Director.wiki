@@ -66,7 +66,7 @@ Test
 |refresh                 |
 |wait for     |5 |seconds|
 |Send back the Request   |
-|wait for     |30|seconds|
+|wait for     |50|seconds|
 
 !*** Logout
 !|script|
@@ -75,7 +75,7 @@ Test
 
 !*** Login as Compliance Manager
 !|script                                                          |
-|wait for                       |30                    |seconds   |
+|wait for                       |50                    |seconds   |
 |refresh                                                          |
 |wait for progress bar                                            |
 |click on menu                  |HOME PAGE                        |
