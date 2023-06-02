@@ -78,11 +78,9 @@ Test
 |wait for                       |50                    |seconds   |
 |refresh                                                          |
 |wait for progress bar                                            |
-|click on menu                  |HOME PAGE                        |
 |login with username            |Anjali@123                       |
 |verify text                    |$RN                   |is present|
 |populate field with placeholder|Search your Tasks here|with |$RN |
-|click on button                |SEARCH                           |
 |wait for progress bar                                            |
 |Review the Request                                               |
 *!
