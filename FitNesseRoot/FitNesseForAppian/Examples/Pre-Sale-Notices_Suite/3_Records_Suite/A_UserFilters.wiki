@@ -23,6 +23,12 @@ Test
 |click on menu      |PRE-SALE NOTICE|
 *!
 
+!*** Validation of 
+!|script                                                                      |
+|wait for                        |10             |seconds                     |
+|populate record type user filter|Last Updated On|with|06/06/2023 - 06/07/2023|
+|wait for                        |10             |seconds                     |
+|$A=                             |get grid       |[1] |row count              |
 
 
 !*** Validation of User filters
