@@ -23,7 +23,6 @@ Test
 |click on record|[11]             |
 
 !*** Field validation
-
 !|script                                                                                |
 |$a1=    |get field|Dummy Reservation                |value                             |
 |$a=     |get field|Product Group                    |value                             |
