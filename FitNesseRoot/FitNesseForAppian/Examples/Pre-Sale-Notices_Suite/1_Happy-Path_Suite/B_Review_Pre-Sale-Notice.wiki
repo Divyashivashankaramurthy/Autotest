@@ -16,10 +16,11 @@ Test
 *!
 
 !*** Review the request
-!|script                     |
-|click on site page|Home Page|
-|wait for          |5|seconds|
-|Review the Request          |
+!|script                      |
+|click on site page|Home Page |
+|wait for          |5 |seconds|
+|Review the Request           |
+|wait for          |30|seconds|
 
 !*** Logout
 !|script|

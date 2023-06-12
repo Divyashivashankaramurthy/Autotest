@@ -24,6 +24,9 @@ Test
 |wait for          |50|seconds|
 |refresh                      |
 |wait for progress bar        |
+|wait for          |5 |seconds|
+|refresh                      |
+|wait for progress bar        |
 |Approve the request          |
 *!
 

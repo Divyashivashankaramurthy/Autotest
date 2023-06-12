@@ -10,6 +10,11 @@ Test
 
 *!
 
+!*** Initialization and Login
+!|script|com.appiancorp.ps.automatedtest.fixture.SitesFixture|
+|Browser setup and navigate to url                           |
+*!
+
 !*** Login and get data from request
 !|script                      |
 |login with username|Akash@123|

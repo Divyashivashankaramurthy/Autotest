@@ -93,8 +93,11 @@ This table initializes the fixture class and sets the environment defaults
 
 !*** Validation of Pie Chart
 !|scenario                      |Validate Pie Chart|Chart    |index      |Index|value|Value           |
+|clear field                    |Search Records                                                       |
+|click on button                |SEARCH                                                               |
+|wait for progress bar                                                                                |
 |click on pie chart             |@Chart            |pie slice|@Index                                  |
-|wait for                       |5                 |seconds                                           |
+|wait for progress bar                                                                                |
 |check                          |get grid          |[1]      |column     |[3]  |row  |[1]|value|@Value|
 |$RC1=                          |get grid          |[1]      |total count                             |
 |populate field with placeholder|Search Records    |with     |@Value                                  |
@@ -134,8 +137,9 @@ This table initializes the fixture class and sets the environment defaults
 |Validate Bar Chart|Status|index|[2]|value|Completed                                  |
 |Validate Bar Chart|Status|index|[3]|value|Forward to REO Director                    |
 |Validate Bar Chart|Status|index|[4]|value|PSN Request Raised                         |
-|Validate Bar Chart|Status|index|[5]|value|PSN Request Send Back to Compliance Manager|
-|Validate Bar Chart|Status|index|[6]|value|Request Send Back to RE Specialist         |
+|Validate Bar Chart|Status|index|[5]|value|PSN Request Resubmitted                    |
+|Validate Bar Chart|Status|index|[6]|value|PSN Request Send Back to Compliance Manager|
+|Validate Bar Chart|Status|index|[7]|value|Request Send Back to RE Specialist         |
 *!
 
 !*** Validation of UserFilters
@@ -254,7 +258,7 @@ This table initializes the fixture class and sets the environment defaults
 !*** Assign request data into variables
 
 |scenario                      |Get Data from requester form                                  |
-|click on menu                 |PRE-SALE NOTICE                                               |
+|click on site page            |PRE-SALE NOTICE                                               |
 |wait for                      |5        |seconds                                             |
 |$R=                           |get grid |[1]           |column|Reference Number|row|[1]|value|
 |click on record related action|$R                                                            |
@@ -278,7 +282,7 @@ This table initializes the fixture class and sets the environment defaults
 
 !*** Validation of data
 |scenario                      |Validate the data flow           |
-|click on menu                 |PRE-SALE NOTICE                  |
+|click on site page            |PRE-SALE NOTICE                  |
 |wait for                      |5        |seconds                |
 |click on record related action|$R                               |
 |check                         |get field|Request Number|value|$R|

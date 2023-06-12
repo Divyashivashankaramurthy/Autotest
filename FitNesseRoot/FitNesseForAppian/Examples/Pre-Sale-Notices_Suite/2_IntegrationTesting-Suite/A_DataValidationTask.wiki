@@ -29,8 +29,8 @@ Test
 *!
 
 !*** Set Test variable
-!|script                                                                                                                                                         |
-|set test variable|PreSaleNotice|with|{"action":"Auction","WorkUnitReference":"Home","priority":"Normal","description":"Sample test","comment":Documents uploded}|
+!|script                                                                                                                                                          |
+|set test variable|PreSaleNotice|with|{"action":"Auction","WorkUnitReference":"Home","priority":"Normal","description":"Sample test","comment":Documents uploaded}|
 *!
 
 !*** fill the request form and Submit
@@ -69,6 +69,7 @@ Test
 |wait for                       |50                             |seconds                   |
 
 !*** Logout
-!|script|
-|logout |
+!|script  |
+|logout   |
+|tear down|
 *!
