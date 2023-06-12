@@ -14,13 +14,20 @@ Test
 *!
 
 !*** 
-!|script                                  |
-|click on menu         |Home Page         |
-|wait for              |50    |seconds    |
-|refresh                                  |
-|wait for progress bar                    |
-|wait for              |50    |seconds    |
-|refresh                                  |
-|wait for progress bar                    |
-|Approve the request in|Third Party Review|
+!|script                      |
+|click on site page|Home Page |
+|wait for          |50|seconds|
+|refresh                      |
+|wait for progress bar        |
+|wait for          |50|seconds|
+|refresh                      |
+|wait for progress bar        |
+|Approve the request          |
+*!
+
+!*** Logout and Tear down
+!|script  |
+|logout   |
+|tear down|
+
 *!

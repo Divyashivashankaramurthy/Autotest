@@ -16,13 +16,10 @@ Test
 *!
 
 !*** Review the request
-!|script                 |
-|click on menu|Home Page |
-|wait for     |5 |seconds|
-|Review the Request      |
-|refresh                 |
-|wait for progress bar   |
-|wait for     |50|seconds|
+!|script                     |
+|click on site page|Home Page|
+|wait for          |5|seconds|
+|Review the Request          |
 
 !*** Logout
 !|script|

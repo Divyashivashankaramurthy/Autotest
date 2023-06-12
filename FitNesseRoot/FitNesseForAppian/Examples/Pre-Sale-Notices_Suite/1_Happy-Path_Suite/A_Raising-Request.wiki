@@ -10,7 +10,7 @@ Test
 *!
 
 !*** Initialization and Login
-!|script|com.appiancorp.ps.automatedtest.fixture.TempoFixture|
+!|script|com.appiancorp.ps.automatedtest.fixture.SitesFixture|
 |Browser setup and navigate to url                           |
 *!
 
@@ -21,20 +21,29 @@ Test
 
 !*** Click on menu
 !|script                                               |
-|click on menu                 |PRE-SALE NOTICE        |
+|click on site page            |PRE-SALE NOTICE        |
 |wait for                      |5       |seconds       |
 |click on record related action|PREPARE PRE-SALE NOTICE|
 |wait for                      |7       |seconds       |
 *!
 
+!*** Set Test variable
+!|script                                                                                                                                                         |
+|set test variable|PreSaleNotice|with|{"action":"Auction","WorkUnitReference":"Home","priority":"Normal","description":"Sample test","comment":Documents uploded}|
+*!
+
 !*** fill the request form and Submit
-!|script        |
-|Raise a Request|
-|logout         |
+!|script                                                                                                                                                                                                    |
+|fill the Genaral Notice 'Work Flow Subtype' with|tv!PreSaleNotice.action|Work Unit Reference|tv!PreSaleNotice.WorkUnitReference|priority|tv!PreSaleNotice.priority|description|tv!PreSaleNotice.description|
+|fill the Reference Document Attachment with     |C:\\Users\\u429130\\Desktop\\Automation scripts_ Fitnesse\\sample.pdf                                                                                     |
+|wait for                                        |5                      |seconds                                                                                                                           |
+|Comment with and submit                         |PFA relavent documents                                                                                                                                    |
+*!
 
-
-***!
-
+!*** Logout
+!|script|
+|logout |
+*!
 
 
 

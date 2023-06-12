@@ -28,7 +28,7 @@ This table initializes the fixture class and sets the environment defaults
 |set appian url to            |https://appiancoe.vuram.com/suite/sites/pre-sale-notices  |
 |set screenshot path to       |C:\Users\u429130\Desktop\ErrorScreenshot_Pre-Sale-Notices\|
 |set take error screenshots to|true                                                      |
-|set appian version to        |22.4                                                      |
+|set appian version to        |23.2                                                      |
 |set appian locale to         |en_US                                                     |
 
 *!
@@ -67,19 +67,19 @@ This table initializes the fixture class and sets the environment defaults
 |wait for                                        |5      |seconds                                                       |
 |Comment with and submit                         |PFA relavent documents                                                |
 *!
-!*** Scenario to review the request
 
-!|scenario                      |Review the Request                                            |
-|click on grid                  |[1]                            |column        |[1]  |row |[1] |
-|wait for                       |5                              |seconds                       |
-|accept task                                                                                   |
-|$Req=                          |get field                      |Request Number|value          |
-|populate field with placeholder|Please enter Your Comments Here|with          |Reviewed       |
-|click on button                |FORWARD                                                       |
+!*** Scenario to review the request
+!|scenario                      |Review the Request                                        |
+|click on grid                  |[1]                            |column        |[1]|row|[1]|
+|wait for                       |5                              |seconds                   |
+|accept task                                                                               |
+|$Req=                          |get field                      |Request Number|value      |
+|populate field with placeholder|Please enter Your Comments Here|with          |Reviewed   |
+|click on button                |FORWARD                                                   |
 *!
 
 !*** Scenario to approve the request
-!|scenario                      |Approve the request in         |Stage             |
+!|scenario                      |Approve the request                               |
 |populate field with placeholder|Search your Tasks here         |with  |$Req       |
 |click on button                |SEARCH                                            |
 |wait for                       |5                              |seconds           |
@@ -267,7 +267,6 @@ This table initializes the fixture class and sets the environment defaults
 |scenario|Store data in variables        |
 |$WU=    |get field|Work Unit      |value|
 |$WFT=   |get field|Workflow Type  |value|
-|$WST=   |get field|[3]            |value|
 |$P=     |get field|Priority       |value|
 |$DES=   |get field|Description    |value|
 |$PN=    |get field|Property Name  |value|
@@ -287,16 +286,15 @@ This table initializes the fixture class and sets the environment defaults
 *!
 
 !*** Comparision of data
-|scenario|Compare Data                           |
-|check   |get field|Work Unit       |value|$WU   |
-|check   |get field|Workflow Type   |value|$WFT  |
-|check   |get field|Workflow Subtype|value|$WST  |
-|check   |get field|Priority        |value|$P    |
-|check   |get field|Description     |value|$DES  |
-|check   |get field|Property Name   |value|$PN   |
-|check   |get field|Property State  |value|$PS   |
-|check   |get field|Property City   |value|$PC   |
-|check   |get field|LPAMS Deal Name |value|$LPAMS|
+|scenario|Compare Data                          |
+|check   |get field|Work Unit      |value|$WU   |
+|check   |get field|Workflow Type  |value|$WFT  |
+|check   |get field|Priority       |value|$P    |
+|check   |get field|Description    |value|$DES  |
+|check   |get field|Property Name  |value|$PN   |
+|check   |get field|Property State |value|$PS   |
+|check   |get field|Property City  |value|$PC   |
+|check   |get field|LPAMS Deal Name|value|$LPAMS|
 *!
 
 !*** Scenario to Sendback the request
@@ -331,3 +329,4 @@ This table initializes the fixture class and sets the environment defaults
 |wait for                       |2                              |seconds            |
 |click on button                |Yes                                                |
 |wait for                       |5                              |seconds            |
+

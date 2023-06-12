@@ -11,7 +11,7 @@ Test
 *!
 
 !*** Initialization and Login
-!|script|com.appiancorp.ps.automatedtest.fixture.TempoFixture|
+!|script|com.appiancorp.ps.automatedtest.fixture.SitesFixture|
 |Browser setup and navigate to url                           |
 *!
 
@@ -19,7 +19,7 @@ Test
 !|script                            |
 |login with username|Anjali@123     |
 |wait for           |5   |seconds   |
-|click on menu      |PRE-SALE NOTICE|
+|click on site page |PRE-SALE NOTICE|
 *!
 
 !*** Validate Search Box
@@ -32,7 +32,7 @@ Test
 !|script                            |
 |login with username|Kavya@123      |
 |wait for           |5   |seconds   |
-|click on menu      |PRE-SALE NOTICE|
+|click on site page |PRE-SALE NOTICE|
 *!
 
 !*** Validate Search Box
@@ -45,7 +45,7 @@ Test
 !|script                            |
 |login with username|Vidya@123      |
 |wait for           |5   |seconds   |
-|click on menu      |PRE-SALE NOTICE|
+|click on site page |PRE-SALE NOTICE|
 *!
 
 !*** Validate Search Box

@@ -11,14 +11,14 @@ Test
 *!
 
 !*** Initialization and Login
-!|script|com.appiancorp.ps.automatedtest.fixture.TempoFixture|
+!|script|com.appiancorp.ps.automatedtest.fixture.SitesFixture|
 |Browser setup and navigate to url                           |
 *!
 
 !*** Login and navigate to records tab
 !|script                            |
 |login with username|Akash@123      |
-|click on menu      |PRE-SALE NOTICE|
+|click on site page |PRE-SALE NOTICE|
 *!
 
 !*** Validate record list view

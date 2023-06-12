@@ -11,19 +11,22 @@ Test
 *!
 
 !*** Initialization, Login and navigate to REPORT tab
-!|script            |com.appiancorp.ps.automatedtest.fixture.TempoFixture|
+!|script            |com.appiancorp.ps.automatedtest.fixture.SitesFixture|
 |Browser setup and navigate to url                                       |
 |login with username|Anjali@123                                          |
 |wait for           |5                      |seconds                     |
-|click on menu      |REPORT                                              |
+|click on site page |REPORT                                              |
 *!
 
-!* validation of Search bar
+!* validation of Search box
 !|script                                                    |
 |populate field with placeholder|Search Records|with|Auction|
 |wait for                       |5             |seconds     |
 |click on button                |SEARCH                     |
 |wait for                       |5             |seconds     |
+|clear field                    |Search Records             |
+|click on button                |SEARCH                     |
+|wait for progress bar                                      |
 *!
 
 
@@ -43,7 +46,7 @@ Test
 !|script                      |
 |login with username|Kavya@123|
 |wait for           |5|seconds|
-|click on menu      |REPORT   |
+|click on site page |REPORT   |
 *!
 
 !* validation of Search bar

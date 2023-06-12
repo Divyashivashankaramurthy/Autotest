@@ -11,7 +11,7 @@ Test
 
 !*** Initialization and Login
 
-!|script|com.appiancorp.ps.automatedtest.fixture.TempoFixture|
+!|script|com.appiancorp.ps.automatedtest.fixture.SitesFixture|
 |Browser setup and navigate to url                           |
 
 *!
@@ -23,7 +23,7 @@ Test
 
 !*** Raise a Request
 !|script                                               |
-|click on menu                 |PRE-SALE NOTICE        |
+|click on site page |PRE-SALE NOTICE        |
 |wait for                      |5       |seconds       |
 |click on record related action|PREPARE PRE-SALE NOTICE|
 |wait for                      |7       |seconds       |
@@ -43,7 +43,7 @@ Test
 
 !*** Sendback the request
 !|script                            |
-|click on menu|Home Page            |
+|click on site page |Home Page            |
 |wait for     |5       |seconds     |
 |click on link|click here to refresh|
 |wait for     |5       |seconds     |

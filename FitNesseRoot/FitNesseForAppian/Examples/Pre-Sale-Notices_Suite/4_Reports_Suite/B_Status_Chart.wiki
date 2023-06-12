@@ -11,11 +11,11 @@ Test
 *!
 
 !*** Initialization, Login and navigate to REPORT tab
-!|script            |com.appiancorp.ps.automatedtest.fixture.TempoFixture|
+!|script           |com.appiancorp.ps.automatedtest.fixture.SitesFixture|
 |Browser setup and navigate to url                                       |
 |login with username|Anjali@123                                          |
 |wait for           |5                      |seconds                     |
-|click on menu      |REPORT                                              |
+|click on site page |REPORT                                              |
 *!
 
 !*** Validate WorkFlowSubtype Chart
@@ -33,7 +33,7 @@ Test
 !|script                      |
 |login with username|Kavya@123|
 |wait for           |5|seconds|
-|click on menu      |REPORT   |
+|click on site page |REPORT   |
 *!
 
 !*** Validate WorkFlowSubtype Chart

@@ -1,0 +1,74 @@
+---
+Help: To initiate the request
+Test
+---
+!*** FitNesse Configurations
+
+!define TEST_SYSTEM {slim}
+!define COMMAND_PATTERN {java -Dlog4j.configuration=file:///${automated.testing.home}/log4j.properties -cp %p %m}
+!path ${automated.testing.home}/**.jar
+
+*!
+
+!*** Initialization and Login
+!|script|com.appiancorp.ps.automatedtest.fixture.SitesFixture|
+|Browser setup and navigate to url                           |
+*!
+
+!*** Login
+!|script                      |
+|login with username|Akash@123|
+*!
+
+!*** Click on menu
+!|script                                               |
+|click on site page            |PRE-SALE NOTICE        |
+|wait for                      |5       |seconds       |
+|click on record related action|PREPARE PRE-SALE NOTICE|
+|wait for                      |7       |seconds       |
+*!
+
+!*** Set Test variable
+!|script                                                                                                                                                         |
+|set test variable|PreSaleNotice|with|{"action":"Auction","WorkUnitReference":"Home","priority":"Normal","description":"Sample test","comment":Documents uploded}|
+*!
+
+!*** fill the request form and Submit
+!|script                                                                                                                                                                                                            |
+|fill the Genaral Notice 'Work Flow Subtype' with|tv!PreSaleNotice.action        |Work Unit Reference|tv!PreSaleNotice.WorkUnitReference|priority|tv!PreSaleNotice.priority|description|tv!PreSaleNotice.description|
+|fill the Reference Document Attachment with     |C:\\Users\\u429130\\Desktop\\Automation scripts_ Fitnesse\\sample.pdf                                                                                             |
+|wait for                                        |5                              |seconds                                                                                                                           |
+|populate field with placeholder                 |Please enter Your Comments here|with               |tv!PreSaleNotice.comment                                                                                      |
+|Store data in variables                                                                                                                                                                                            |
+|click on button                                 |SUBMIT                                                                                                                                                            |
+|wait for                                        |2                              |seconds                                                                                                                           |
+|click on button                                 |Yes                                                                                                                                                               |
+|wait for                                        |3                              |minutes                                                                                                                           |
+|click on button                                 |Ok                                                                                                                                                                |
+|logout                                                                                                                                                                                                             |
+***!
+
+!*** Login as Compliance Manager
+!|script                       |
+|login with username|Anjali@123|
+*!
+
+!*** Review the request
+!|script                                                                                   |
+|click on site page             |Home Page                                                 |
+|wait for                       |5                              |seconds                   |
+|click on grid                  |[1]                            |column        |[1]|row|[1]|
+|wait for                       |5                              |seconds                   |
+|accept task                                                                               |
+|Compare Data                                                                              |
+|$Req=                          |get field                      |Request Number|value      |
+|populate field with placeholder|Please enter Your Comments Here|with          |Reviewed   |
+|click on button                |FORWARD                                                   |
+|refresh                                                                                   |
+|wait for progress bar                                                                     |
+|wait for                       |50                             |seconds                   |
+
+!*** Logout
+!|script|
+|logout |
+*!

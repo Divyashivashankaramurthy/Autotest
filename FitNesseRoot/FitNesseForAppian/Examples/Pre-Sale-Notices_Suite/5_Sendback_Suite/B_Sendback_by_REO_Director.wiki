@@ -10,7 +10,7 @@ Test
 *!
 
 !*** Initialization and Login
-!|script|com.appiancorp.ps.automatedtest.fixture.TempoFixture|
+!|script|com.appiancorp.ps.automatedtest.fixture.SitesFixture|
 |Browser setup and navigate to url                           |
 *!
 
@@ -21,7 +21,7 @@ Test
 
 !*** Raise a Request
 !|script                                               |
-|click on menu                 |PRE-SALE NOTICE        |
+|click on site page            |PRE-SALE NOTICE        |
 |wait for                      |5       |seconds       |
 |click on record related action|PREPARE PRE-SALE NOTICE|
 |wait for                      |7       |seconds       |
@@ -39,12 +39,12 @@ Test
 *!
 
 !*** Review the request
-!|script                 |
-|click on menu|Home Page |
-|wait for     |5 |seconds|
-|Review the Request      |
-|refresh                 |
-|wait for     |50|seconds|
+!|script                      |
+|click on site page|Home Page |
+|wait for          |5 |seconds|
+|Review the Request           |
+|refresh                      |
+|wait for          |50|seconds|
 *!
 
 !*** Logout
@@ -60,13 +60,13 @@ Test
 
 
 !*** Sendback the request
-!|script                 |
-|click on menu|Home Page |
-|wait for     |30|seconds|
-|refresh                 |
-|wait for     |5 |seconds|
-|Send back the Request   |
-|wait for     |50|seconds|
+!|script                      |
+|click on site page|Home Page |
+|wait for          |30|seconds|
+|refresh                      |
+|wait for          |5 |seconds|
+|Send back the Request        |
+|wait for          |50|seconds|
 
 !*** Logout
 !|script|

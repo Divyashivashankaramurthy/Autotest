@@ -15,10 +15,10 @@ Test
 ----
 !*** Initialization and Login to Tempo
 
-!| script             |com.appiancorp.ps.automatedtest.fixture.TempoFixture        |
+!| script             |com.appiancorp.ps.automatedtest.fixture.SitesFixture        |
 |setup with           |CHROME                       |browser                       |
 |set appian url to    |https://appiancoe.vuram.com/suite/sites/case-management-site|
-|set appian version to|22.4                                                        |
+|set appian version to|23.1.1                                                      |
 |set appian locale to |en_US                                                       |
 |login with username  |Akash@123                                                   |
 *!
@@ -26,8 +26,8 @@ Test
 
 !** Navigate to records tab
 
-!|script             |
-|click on menu|record|
+!|script                  |
+|click on site page|record|
 *!
 !*** Sorting records
 !|script                                     |

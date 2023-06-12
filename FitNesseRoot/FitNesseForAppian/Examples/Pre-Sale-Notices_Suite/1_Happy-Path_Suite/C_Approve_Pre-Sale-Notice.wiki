@@ -15,20 +15,18 @@ Test
 |login with username|Kavya@123|
 *!
 
-!*** 
-!|script                                        |
-|click on menu         |Home Page               |
-|wait for              |5        |seconds       |
-|refresh                                        |
-|wait for progress bar                          |
-|wait for              |50       |seconds       |
-|refresh                                        |
-|wait for progress bar                          |
-|Approve the request in|Pre-Sale Notice Approval|
-|refresh                                        |
-|wait for progress bar                          |
-|wait for              |50       |seconds       |
+!*** Approve the Request
+!|script                      |
+|click on site page|Home Page |
+|wait for          |5 |seconds|
+|refresh                      |
+|wait for progress bar        |
+|wait for          |50|seconds|
+|refresh                      |
+|wait for progress bar        |
+|Approve the request          |
 *!
+
 !*** Logout
 !|script|
 |logout |
