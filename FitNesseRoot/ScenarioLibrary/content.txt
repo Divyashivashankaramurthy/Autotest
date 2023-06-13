@@ -81,7 +81,6 @@ This table initializes the fixture class and sets the environment defaults
 !*** Scenario to approve the request
 !|scenario                      |Approve the request                               |
 |populate field with placeholder|Search your Tasks here         |with  |$Req       |
-|click on button                |SEARCH                                            |
 |wait for                       |5                              |seconds           |
 |click on grid                  |[1]                            |column|[1]|row|[1]|
 |wait for                       |5                              |seconds           |
