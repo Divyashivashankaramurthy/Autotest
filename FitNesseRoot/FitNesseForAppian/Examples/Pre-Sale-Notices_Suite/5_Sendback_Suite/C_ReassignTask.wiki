@@ -1,0 +1,80 @@
+---
+Help: To check whether the user can Reassign a particular task back to the group
+Test
+---
+!*** FitNesse Configurations
+
+!define TEST_SYSTEM {slim}
+!define COMMAND_PATTERN {java -Dlog4j.configuration=file:///${automated.testing.home}/log4j.properties -cp %p %m}
+!path ${automated.testing.home}/**.jar
+*!
+
+!*** Initialization and Login
+!|script|com.appiancorp.ps.automatedtest.fixture.SitesFixture|
+|Browser setup and navigate to url                           |
+*!
+
+!*** Login as RE Specialist
+!#|script                      |
+|login with username|Akash@123|
+*!
+
+!*** Raise a Request
+!#|script                                               |
+|click on site page            |PRE-SALE NOTICE        |
+|wait for                      |5       |seconds       |
+|click on record related action|PREPARE PRE-SALE NOTICE|
+|wait for                      |7       |seconds       |
+|Raise a Request                                       |
+*!
+
+!*** Logout
+!#|script|
+|logout|
+*!
+
+!*** Login as Compliance Manager
+!|script                       |
+|login with username|Anjali@123|
+*!
+
+!*** Review the request
+!|script                                                                                          |
+|click on site page             |Home Page                                                        |
+|wait for                       |5                     |seconds                                   |
+|click on grid                  |[1]                   |column        |[1]           |row   |[1]  |
+|wait for                       |5                     |seconds                                   |
+|accept task                                                                                      |
+|$Req=                          |get field             |Request Number|value                      |
+|click on button                |Reassign                                                         |
+|wait for progress bar                                                                            |
+|wait for                       |5                     |seconds                                   |
+|populate field                 |Reassign To           |with          |Sangeetha S (Sangeetha@123)|
+|click on button                |Reassign[2]                                                      |
+|wait for progress bar                                                                            |
+|populate field with placeholder|Search your Tasks here|with          |$Req                       |
+|check                          |get grid              |[1]           |total count   |0           |
+*!
+
+!*** Logout
+!|script|
+|logout |
+*!
+
+!*** Login as Reassignee
+!|script                          |
+|login with username|Sangeetha@123|
+*!
+
+!*** Verify task got assigned and forword the task
+|populate field with placeholder|Search your Tasks here         |with  |$Req                                 |
+|verify grid                    |[1]                            |column|Task Status|row|[1]|contains|Accepted|
+|populate field with placeholder|Please enter Your Comments Here|with  |Reviewed                             |
+|click on button                |FORWARD                                                                     |
+*!
+
+!*** Logout and Tear down
+!|script  |
+|logout   |
+|tear down|
+*!
