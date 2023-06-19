@@ -81,7 +81,6 @@ This table initializes the fixture class and sets the environment defaults
 !*** Scenario to approve the request
 !|scenario                      |Approve the request                               |
 |populate field with placeholder|Search your Tasks here         |with  |$Req       |
-|click on button                |SEARCH                                            |
 |wait for                       |5                              |seconds           |
 |click on grid                  |[1]                            |column|[1]|row|[1]|
 |wait for                       |5                              |seconds           |
@@ -92,38 +91,52 @@ This table initializes the fixture class and sets the environment defaults
 
 
 !*** Validation of Pie Chart
-!|scenario                      |Validate Pie Chart|Chart    |index      |Index|value|Value           |
-|clear field                    |Search Records                                                       |
-|click on button                |SEARCH                                                               |
-|wait for progress bar                                                                                |
-|click on pie chart             |@Chart            |pie slice|@Index                                  |
-|wait for progress bar                                                                                |
-|check                          |get grid          |[1]      |column     |[3]  |row  |[1]|value|@Value|
-|$RC1=                          |get grid          |[1]      |total count                             |
-|populate field with placeholder|Search Records    |with     |@Value                                  |
-|wait for                       |5                 |seconds                                           |
-|click on button                |SEARCH                                                               |
-|wait for                       |2                 |seconds                                           |
-|check                          |get grid          |[1]      |total count|$RC1                        |
-|clear field                    |Search Records                                                       |
-|wait for                       |3                 |seconds                                           |
-|refresh                                                                                              |
-|wait for                       |5                 |seconds                                           |
+!|scenario                      |Validate Pie Chart|Chart           |index               |Index|value|Value           |
+|clear field                    |Search Records                                                                       |
+|click on button                |SEARCH                                                                               |
+|wait for progress bar                                                                                                |
+|click on pie chart             |@Chart            |pie slice       |@Index                                           |
+|wait for progress bar                                                                                                |
+|check                          |get grid          |[1]             |column              |[3]  |row  |[1]|value|@Value|
+|$RC1=                          |get grid          |[1]             |total count                                      |
+|populate field with placeholder|Search Records    |with            |@Value                                           |
+|wait for                       |5                 |seconds                                                           |
+|click on button                |SEARCH                                                                               |
+|wait for                       |2                 |seconds                                                           |
+|check                          |get grid          |[1]             |total count         |$RC1                        |
+|clear field                    |Search Records                                                                       |
+|$Req=                          |get grid          |[1]             |column              |[1]  |row  |[1]|value       |
+|click on grid                  |[1]               |column          |PSN Reference Number|row  |[1]                   |
+|wait for progress bar                                                                                                |
+|wait for                       |3                 |seconds                                                           |
+|check                          |get field         |Request Number  |value               |$Req                        |
+|check                          |get field         |Workflow Subtype|value               |@Value                      |
+|refresh                                                                                                              |
+|wait for                       |5                 |seconds                                                           |
 *!
 
 !*** Validation of Bar Chart
-!|scenario         |Validate Bar Chart|Chart     |index      |Index|value|Value           |
-|click on bar chart|@Chart            |bar       |@Index                                  |
-|check             |get grid          |[1]       |column     |[4]  |row  |[1]|value|@Value|
-|$RC2=             |get grid          |[1]       |total count                             |
-|wait for          |5                 |seconds                                            |
-|populate field    |[1]               |with value|@Value                                  |
-|wait for          |5                 |seconds                                            |
-|click on button   |SEARCH                                                                |
-|wait for          |5                 |seconds                                            |
-|check             |get grid          |[1]       |total count|$RC2                        |
-|clear field       |Search Records                                                        |
-|wait for          |3                 |seconds                                            |
+!|scenario         |Validate Bar Chart|Chart           |index               |Index            |value|Value           |
+|click on bar chart|@Chart            |bar             |@Index                                                       |
+|check             |get grid          |[1]             |column              |[4]              |row  |[1]|value|@Value|
+|$RC2=             |get grid          |[1]             |total count                                                  |
+|wait for          |5                 |seconds                                                                       |
+|populate field    |[1]               |with value      |@Value                                                       |
+|wait for          |5                 |seconds                                                                       |
+|click on button   |SEARCH                                                                                           |
+|wait for          |5                 |seconds                                                                       |
+|check             |get grid          |[1]             |total count         |$RC2                                    |
+|$Req=             |get grid          |[1]             |column              |[1]              |row  |[1]|value       |
+|$WFS=             |get grid          |[1]             |column              |Work Flow Subtype|row  |[1]|value       |
+|click on grid     |[1]               |column          |PSN Reference Number|row              |[1]                   |
+|wait for progress bar                                                                                               |
+|wait for          |3                 |seconds                                                                       |
+|check             |get field         |Request Number  |value               |$Req                                    |
+|check             |get field         |Workflow Subtype|value               |$WFS                                    |
+|click on site page|REPORT                                                                                           |
+|clear field       |Search Records                                                                                   |
+|click on button   |SEARCH                                                                                           |
+|wait for          |3                 |seconds                                                                       |
 
 *!
 

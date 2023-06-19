@@ -1,0 +1,57 @@
+---
+Test
+---
+!*** FitNesse Configurations
+
+!define TEST_SYSTEM {slim}
+!define COMMAND_PATTERN {java -Dlog4j.configuration=file:///${automated.testing.home}/log4j.properties -cp %p %m}
+!path ${automated.testing.home}/**.jar
+*!
+
+!*** Initialization and Login
+!|script|com.appiancorp.ps.automatedtest.fixture.SitesFixture|
+|Browser setup and navigate to url                           |
+*!
+!*** Login as Compliance Manager
+!|script                       |
+|login with username|Anjali@123|
+*!
+
+!*** Review the request
+!|script                                                                                  |
+|click on site page             |Home Page                                                |
+|wait for                       |5                     |seconds                           |
+|click on grid                  |[1]                   |column        |[1]        |row|[3]|
+|wait for                       |5                     |seconds                           |
+|accept task                                                                              |
+|$Req=                          |get field             |Request Number|value              |
+|click on button                |Reject                                                   |
+|wait for                       |5                     |seconds                           |
+|click on button                |Reject[2]                                                |
+|populate field with placeholder|Search your Tasks here|with          |$Req               |
+|wait for                       |5                     |seconds                           |
+|check                          |get grid              |[1]           |total count|0      |
+*!
+
+!*** Logout
+!|script|
+|logout |
+*!
+
+!*** Login as Reassignee
+!|script                          |
+|login with username|Sangeetha@123|
+*!
+
+!*** Verify task got assigned and forword the task
+!|script                                                                                            |
+|populate field with placeholder|Search your Tasks here|with  |$Req                                 |
+|verify grid                    |[1]                   |column|Task Status|row|[1]|contains|Assigned|
+*!
+
+!*** Logout and Tear down
+!|script  |
+|logout   |
+|tear down|
+*!
+
